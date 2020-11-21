@@ -3,8 +3,9 @@
 ### Usage
 
 .env file should look like this:
-REACT_APP_API_URL = 4000
-REACT_APP_HOST = REACT_APP_HOST
+
+- REACT_APP_API_URL = 4000
+- REACT_APP_HOST = REACT_APP_HOST
 
 ### Getting started
 
