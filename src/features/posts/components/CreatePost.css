@@ -1,0 +1,50 @@
+Body {
+  background-color: rgb(38, 38, 48);
+  height: 100%;
+  width: 100%;
+}
+
+Label {
+  background-color: rgb(58, 58, 68);
+  color: white;
+  text-align: center;
+  display: block;
+  padding-top: 4px;
+  padding-bottom: 8px;
+  height: 5%;
+}
+
+Form {
+  background-color: rgb(48, 48, 61);
+  width: 45%;
+  height: 300px;
+  display: block;
+  margin-left: 28%;
+  margin-top: 2%;
+  position: absolute;
+}
+
+Input {
+  background-color: rgb(50, 50, 63);
+
+  width: 70%;
+  height: 50%;
+  margin-left: 16%;
+  margin-top: 10%;
+  position: relative;
+  color: white;
+}
+
+Button {
+  display: block;
+  background-color: rgb(50, 50, 63);
+  margin-top: 5px;
+  text-align: center;
+  margin-left: 45%;
+  height: 40px;
+  width: 90px;
+  color: white;
+}
+Button:hover {
+  background-color: rgb(58, 58, 68);
+}
