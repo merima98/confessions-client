@@ -26,8 +26,7 @@ H1 {
   float: left;
   margin-left: -25px;
   margin-bottom: 2px;
-  /* background-image: url(../../../images/confessionsimage.png) -22px -242px
-    no-repeat; */
+
   padding-bottom: 10px;
 }
 a {
@@ -39,7 +38,7 @@ a {
     box-sizing: border-box;
   }
   .Container {
-    max-width: 992px;
+    width: 992px;
   }
   H1 {
     box-sizing: border-box;

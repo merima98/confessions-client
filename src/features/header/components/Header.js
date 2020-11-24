@@ -1,10 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-// import { ReactComponent as homeIcon } from "../../../icons/home.svg";
-
-// import { ReactComponent as bellIcon } from "../../../../icons/home.svg";
-// import { ReactComponent as editIcon } from "../../../../icons/home.svg";
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -48,23 +44,19 @@ const StyledNavLink = styled(NavLink)`
   justify-content: center;
   flex-grow: 1;
   border-bottom: 2px solid transparent;
-  color: ${(props) => props.theme.primary};
+  text-decoration: none;
   &.active {
-    color: ${(props) => props.theme.brand};
-    border-bottom: 2px solid ${(props) => props.theme.brand};
-  }
-  &:hover ${IconWrapper} {
-    background-color: ${(props) => props.theme.brand}19;
-    svg {
-      stroke: ${(props) => props.theme.brand};
-    }
+    color: white;
+    text-decoration: none;
+    border-bottom: 2px solid white;
   }
 `;
 
 const Home = styled.div`
   height: 20px;
   width: 20px;
-  color: ${(props) => props.theme.secondary};
+  color: white;
+  text-decoration: none;
 `;
 
 // const Notifications = styled.div`
@@ -76,7 +68,8 @@ const Home = styled.div`
 const Submit = styled.div`
   height: 20px;
   width: 20px;
-  color: ${(props) => props.theme.secondary};
+  color: white;
+  display: block;
 `;
 
 function Header(props) {
@@ -91,7 +84,7 @@ function Header(props) {
           </StyledNavLink>
           <StyledNavLink exact to="/confessions">
             <IconWrapper>
-              <Submit>Submit</Submit>
+              <Submit>Confession</Submit>
             </IconWrapper>
           </StyledNavLink>
         </Nav>

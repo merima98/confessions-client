@@ -1,0 +1,41 @@
+.Content {
+  background-color: #454545;
+  min-height: 100vh;
+}
+.Container {
+  padding: 64px 20px;
+  max-width: 992px;
+  width: 100%;
+  margin: 0 auto;
+}
+.Confesions {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 576px;
+}
+
+.SideDiv {
+  display: none;
+}
+.SideBar {
+  position: sticky;
+  top: 64px;
+}
+
+@media (min-width: 992px) {
+  .Container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-gap: 20px;
+  }
+  .Confesions {
+    margin: initial;
+    width: initial;
+    max-width: initial;
+  }
+
+  .SideDiv {
+    display: flex;
+    flex-direction: column;
+  }
+}

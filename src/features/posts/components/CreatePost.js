@@ -52,7 +52,7 @@ function CreatePost(props) {
           )}
 
           <textarea
-            className="inputClasname"
+            className={classes.Textarea}
             type="text"
             name="body"
             placeholder="Your confession here..."
