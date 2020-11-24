@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useFormik } from "formik";
 import classes from "./CreatePost.css";
+import * as Yup from "yup";
+import Message from "../components/UI/Message/Message";
 const { REACT_APP_HOST } = process.env;
 const { REACT_APP_PORT } = process.env;
+
 function CreatePost(props) {
+  const [showRule, setShowRule] = useState(props.clicked);
+
+  const validationSchema = Yup.object().shape({
+    body: Yup.string()
+      .max(280, "Max 280 characters")
+      .min(20, "Must enter minimum 20 charasters!"),
+  });
   const formik = useFormik({
+    validationSchema,
     initialValues: {
       body: props.body || "",
     },
-
     onSubmit() {
       axios
         .post(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/`, {
@@ -18,17 +28,31 @@ function CreatePost(props) {
         .then((res) => {
           console.log(res);
           console.log(res.data);
+          props.history.push("/");
         });
     },
   });
-  return (
-    <div>
-      <body className={classes.Body}>
-        <form className={classes.Form} onSubmit={formik.handleSubmit}>
-          <label className={classes.Label}>Post</label>
 
-          <input
-            className={classes.Input}
+  function handleShow() {
+    setShowRule(!showRule);
+  }
+
+  return (
+    <div className={classes.Body}>
+      {showRule ? (
+        <Message clicked={showRule} />
+      ) : (
+        <form className={classes.Form} onSubmit={formik.handleSubmit}>
+          <label onClick={handleShow} className={classes.Label}>
+            Rules for approving confessions
+          </label>
+
+          {formik.touched.body && formik.errors.body && (
+            <span className={classes.Span}>{formik.errors.body}</span>
+          )}
+
+          <textarea
+            className="inputClasname"
             type="text"
             name="body"
             placeholder="Your confession here..."
@@ -50,7 +74,7 @@ function CreatePost(props) {
           </button>
           <br />
         </form>
-      </body>
+      )}
     </div>
   );
 }

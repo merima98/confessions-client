@@ -1,0 +1,8 @@
+Textarea {
+  width: 45%;
+  margin-left: 28%;
+  height: 1000%;
+  position: fixed;
+  opacity: 0.5;
+  overflow-y: visible;
+}

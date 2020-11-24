@@ -1,11 +1,13 @@
 Body {
-  background-color: rgb(38, 38, 48);
+  /* background-color: rgb(38, 38, 48); */
   height: 100%;
   width: 100%;
+  background-image: url(../../../images/image.png);
+  overflow-y: visible;
 }
 
 Label {
-  background-color: rgb(58, 58, 68);
+  background-color: rgb(89, 89, 110);
   color: white;
   text-align: center;
   display: block;
@@ -13,38 +15,74 @@ Label {
   padding-bottom: 8px;
   height: 5%;
 }
-
-Form {
-  background-color: rgb(48, 48, 61);
-  width: 45%;
-  height: 300px;
+Span {
+  /* background-color: rgb(89, 89, 110); */
+  background-color: red;
+  color: white;
+  text-align: center;
   display: block;
-  margin-left: 28%;
-  margin-top: 2%;
-  position: absolute;
+  padding-top: 4px;
+  padding-bottom: 8px;
+  height: 5%;
+}
+Label:hover {
+  background-color: rgb(113, 113, 141);
 }
 
-Input {
-  background-color: rgb(50, 50, 63);
+Form {
+  background-color: rgb(21, 21, 26);
+  width: 50%;
+  height: 335px;
+  display: block;
+  margin-left: 28%;
+  margin-top: 5%;
+  position: absolute;
+  opacity: 0.5;
+}
 
-  width: 70%;
-  height: 50%;
-  margin-left: 16%;
+.inputClasname {
+  background-color: rgb(35, 35, 43);
+  width: 60%;
+  height: 40%;
+  margin-left: 22%;
   margin-top: 10%;
+  padding-top: 0;
+  border-radius: 5px;
+  border-bottom: 0;
+  border-right: 0;
   position: relative;
   color: white;
+  display: block;
 }
 
 Button {
   display: block;
-  background-color: rgb(50, 50, 63);
+  background-color: rgb(35, 35, 43);
   margin-top: 5px;
   text-align: center;
   margin-left: 45%;
   height: 40px;
   width: 90px;
+  border-radius: 5px;
   color: white;
 }
 Button:hover {
   background-color: rgb(58, 58, 68);
+}
+
+@media only screen and (max-width: 1254px) {
+  Body {
+    width: 50%;
+    margin-left: 15%;
+    margin-top: 0;
+    box-sizing: border-box;
+  }
+  Form {
+    width: 22.5%;
+  }
+  Button {
+    box-sizing: border-box;
+    margin-left: 37.5%;
+    margin-top: 3%;
+  }
 }
