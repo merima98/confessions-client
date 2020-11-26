@@ -50,11 +50,11 @@ function UpvotedPosts(props) {
       max-width: initial;
     }
   `;
-  const PostEmpty = styled.p`
-    font-size: 0.8rem;
-    text-align: center;
-    color: ${(props) => props.theme.primary};
-  `;
+  //   const PostEmpty = styled.p`
+  //     font-size: 0.8rem;
+  //     text-align: center;
+  //     color: ${(props) => props.theme.primary};
+  //   `;
 
   const SidebarContainer = styled.div`
     display: none;

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Post from "./Post";
-import axios from "axios";
 
 import Header from "../../header/components/Header";
 import Home from "./Home";
@@ -45,22 +44,22 @@ function Posts(props) {
     margin: 0 auto;
     width: 100%;
     max-width: 576px;
-    @media (min-width: 992px) {
+    @media (min-width: 1090px) {
       margin: initial;
       width: initial;
       max-width: initial;
     }
   `;
-  const PostEmpty = styled.p`
-    font-size: 0.8rem;
-    text-align: center;
-    color: ${(props) => props.theme.primary};
-  `;
+  // const PostEmpty = styled.p`
+  //   font-size: 0.8rem;
+  //   text-align: center;
+  //   color: ${(props) => props.theme.primary};
+  // `;
 
   const SidebarContainer = styled.div`
     display: none;
     margin-left: 500px;
-    @media (min-width: 992px) {
+    @media (min-width: 1090px) {
       display: flex;
       flex-direction: column;
     }
