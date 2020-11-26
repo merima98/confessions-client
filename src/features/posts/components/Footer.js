@@ -39,12 +39,12 @@ function Footer() {
     <Tile>
       <LinksWrapper>
         <Links>
-          <StyledLink to="/">Upwotes</StyledLink>
-          <StyledLink to="/">Downvotes</StyledLink>
-          <StyledLink to="/">Last added</StyledLink>
+          <StyledLink to="/sort/upvoted">Upvotes</StyledLink>
+          <StyledLink to="/sort/downvoted">Downvotes</StyledLink>
+          <StyledLink to="/sort/lastadded">Last added</StyledLink>
         </Links>
         <Links>
-          <StyledLink to="/">Random</StyledLink>
+          <StyledLink to="/sort/random">Random</StyledLink>
         </Links>
       </LinksWrapper>
       <Copyright>© Confessions, Inc. All rights reserved</Copyright>
