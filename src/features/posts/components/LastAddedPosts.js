@@ -42,26 +42,30 @@ function LastAddedPosts(props) {
   `;
   const PostsContainer = styled.div`
     margin: 0 auto;
-    width: 100%;
+    width: 50%;
     max-width: 576px;
-    @media (min-width: 992px) {
+    @media (min-width: 1090px) {
       margin: initial;
       width: initial;
-      max-width: initial;
+      max-width: 25%;
     }
   `;
-  //   const PostEmpty = styled.p`
-  //     font-size: 0.8rem;
-  //     text-align: center;
-  //     color: ${(props) => props.theme.primary};
-  //   `;
+  // const PostEmpty = styled.p`
+  //   font-size: 0.8rem;
+  //   text-align: center;
+  //   color: ${(props) => props.theme.primary};
+  // `;
 
   const SidebarContainer = styled.div`
     display: none;
-    margin-left: 500px;
-    @media (min-width: 992px) {
-      display: flex;
+    width: 50%;
+    top: 10%;
+    right: 0.5rem;
+    position: fixed;
+    @media (min-width: 300px) {
+      display: fixed;
       flex-direction: column;
+      width: 25%;
     }
   `;
 

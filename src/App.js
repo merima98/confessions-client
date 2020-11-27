@@ -7,6 +7,7 @@ import CreatePost from "./features/posts/components/CreatePost";
 import UpvotedPosts from "./features/posts/components/UpvotedPosts";
 import DownvotedPosts from "./features/posts/components/DownvotedPosts";
 import LastAddedPosts from "./features/posts/components/LastAddedPosts";
+import ModeratePost from "./features/posts/components/ModeratePost";
 import Header from "./features/header/components/Header";
 
 import "./App.css";
@@ -24,6 +25,7 @@ const app = (props) => {
             <Route path="/sort/upvoted" component={UpvotedPosts} />
             <Route path="/sort/downvoted" component={DownvotedPosts} />
             <Route path="/sort/lastadded" component={LastAddedPosts} />
+            <Route path="/moderate" component={ModeratePost} />
           </Switch>
         </BrowserRouter>
       </React.Fragment>

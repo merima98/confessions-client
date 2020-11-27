@@ -9,13 +9,23 @@ const Tile = styled.div`
   background-color: #454545;
   display: block;
   opacity: 0.5;
+  background-color: black;
 `;
 
-const Title = styled.h2`
+const Button = styled(Link)`
   font-size: 0.8rem;
-  font-weight: normal;
-  margin-bottom: 10px;
+  padding: 10px 26px;
+  cursor: pointer;
   color: white;
+  display: block;
+  text-align: center;
+  background-color: #454545;
+  border-radius: 1px solid #454545;
+  text-decoration: none;
+  &:hover {
+    background-color: #a3a2a2;
+    opacity: 0.8;
+  }
 `;
 
 const Description = styled.p`
@@ -24,26 +34,23 @@ const Description = styled.p`
   color: white;
 `;
 
-const Submit = styled(Link)`
-  font-size: 0.8rem;
-  padding: 6px 16px;
-  cursor: pointer;
-  color: #fff;
-  display: block;
-  text-align: center;
-  background-color: #454545;
-  border-radius: 1px solid #454545;
-  text-decoration: none;
-`;
+// const Submit = styled(Link)`
+//   font-size: 0.8rem;
+//   padding: 6px 16px;
+//   cursor: pointer;
+//   color: #fff;
+//   display: block;
+//   text-align: center;
+//   background-color: #454545;
+//   border-radius: 1px solid #454545;
+//   text-decoration: none;
+// `;
 
 function Home() {
   return (
     <Tile>
-      <Title>Home</Title>
-      <Description>
-        Your personal frontpage. Come here to check in with your favorite posts.
-      </Description>
-      <Submit to="/confessions">Create post</Submit>
+      <Button to="/moderate">Be admin! </Button>
+      <Description>Do you want this confession to be published?</Description>
     </Tile>
   );
 }

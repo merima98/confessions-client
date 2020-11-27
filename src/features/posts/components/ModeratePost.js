@@ -1,31 +1,32 @@
 import React, { useEffect } from "react";
-import Post from "./Post";
-
 import Header from "../../header/components/Header";
 import Home from "./Home";
 import Footer from "./Footer";
+import Moderate from "./Moderate";
 import styled from "styled-components";
 
-function Posts(props) {
-  const [posts, setPosts] = React.useState([]);
+function ModeratePost(props) {
+  const [posts, setPostsData] = React.useState([]);
   const { REACT_APP_HOST } = process.env;
   const { REACT_APP_PORT } = process.env;
 
   useEffect(async () => {
     try {
       const response = await fetch(
-        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`
+        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/moderate`
       );
       const data = await response.json();
-      console.log(data);
-      setPosts(data.posts);
+
+      setPostsData(data.posts);
+
+      console.log(data.posts);
     } catch (err) {
       console.log(err);
     }
-  }, [setPosts]);
+  }, [setPostsData]);
+
   const Wrapper = styled.div`
     min-height: 100vh;
-    background-color: #454545;
     opacity: 0.5;
   `;
 
@@ -76,6 +77,7 @@ function Posts(props) {
     width: 100px;
     height: 25px;
     display: inline;
+    margin-left: 9rem;
   `;
   const Condemn = styled.button`
     background-color: #454545;
@@ -85,21 +87,17 @@ function Posts(props) {
     width: 100px;
     height: 25px;
     display: inline;
+    margin-left: 9rem;
   `;
 
   return (
     <Wrapper>
-      <Header />
       <Container>
+        <Header />
+
         <PostsContainer>
-          {posts.map((post) => {
-            return (
-              <div key={post._id}>
-                <Post key={post._id} body={post.body} date={post.date} />
-                <Approve>Approve</Approve> <Condemn>Condemn</Condemn>
-              </div>
-            );
-          })}
+          <Moderate body={posts.body} />
+          <Approve>Approve</Approve> <Condemn>Condemn</Condemn>
         </PostsContainer>
         <SidebarContainer>
           <Sidebar>
@@ -111,4 +109,4 @@ function Posts(props) {
     </Wrapper>
   );
 }
-export default Posts;
+export default ModeratePost;
