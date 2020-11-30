@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 
 const Tile = styled.footer`
   padding: 10px;
-  border-radius: 1px solid #454545;
-  background-color: #454545;
-  color: white;
+  border-radius: 1px;
+  padding: 64px 20px;
+  @media (min-width: 992px) {
+    display: grid;
+    grid-gap: 20px;
+  }
 `;
 
 const LinksWrapper = styled.div`
@@ -24,6 +27,15 @@ const StyledLink = styled(Link)`
   font-size: 0.8rem;
   color: white;
   text-decoration: none;
+  padding: 2px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #4d4d4d;
+    opacity: 0.5;
+    transition: 0.5s;
+    border-radius: 7%;
+  }
 `;
 
 const Copyright = styled.span`

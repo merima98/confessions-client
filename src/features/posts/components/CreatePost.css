@@ -1,12 +1,13 @@
-Body {
+.Body {
   /* background-color: rgb(38, 38, 48); */
   height: 100%;
   width: 100%;
-  background-image: url(../../../images/image.png);
+  /* background-image: url(../../../images/image.png); */
+  background-color: #000000;
   overflow-y: visible;
 }
 
-Label {
+.Label {
   background-color: rgb(89, 89, 110);
   color: white;
   text-align: center;
@@ -24,11 +25,11 @@ Label {
   padding-bottom: 8px;
   height: 5%;
 }
-Label:hover {
+.Label:hover {
   background-color: rgb(113, 113, 141);
 }
 
-Form {
+.Form {
   background-color: rgb(21, 21, 26);
   width: 45%;
   height: 335px;
@@ -41,7 +42,7 @@ Form {
   align-items: center;
 }
 
-Form Textarea {
+.Form .Textarea {
   background-color: rgb(35, 35, 43);
   width: 400px;
   height: 150px;
@@ -56,7 +57,7 @@ Form Textarea {
   align-items: center;
 }
 
-Form Button {
+.Form .Button {
   display: block;
 
   background-color: rgb(35, 35, 43);
@@ -66,28 +67,35 @@ Form Button {
   height: 40px;
   width: 90px;
   border-radius: 5px;
+
   color: white;
 }
-Form Button:hover {
+.Form .Button:hover {
   background-color: rgb(58, 58, 68);
 }
 
 @media only screen and (max-width: 1254px) {
-  Body {
+  .Body {
     width: 50%;
     margin-left: 15%;
     margin-top: 0;
     box-sizing: border-box;
   }
-  Form {
+  .Form {
     width: 20%;
   }
-  Form Textarea {
+  .Form .Textarea {
     margin-top: 50px;
   }
-  Button {
+  .Button {
     box-sizing: border-box;
     margin-left: 37.5%;
     margin-top: 3%;
   }
+}
+
+.tempClass {
+  border-radius: 2%;
+  cursor: pointer;
+  border-bottom: green 1px;
 }

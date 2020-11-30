@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useFormik } from "formik";
-import classes from "./CreatePost.css";
 import * as Yup from "yup";
+import classes from "./CreatePost.css";
 import Message from "../components/UI/Message/Message";
 const { REACT_APP_HOST } = process.env;
 const { REACT_APP_PORT } = process.env;

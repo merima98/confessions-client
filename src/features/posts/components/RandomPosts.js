@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import Post from "./Post";
-
-import Header from "../../header/components/Header";
-import Home from "./Home";
-import Footer from "./Footer";
 import styled from "styled-components";
+
+import Post from "./Post";
+import Header from "../../header/components/Header";
+import Footer from "./Footer";
 
 function RandomPosts(props) {
   const [posts, setPosts] = React.useState([]);
@@ -108,7 +107,6 @@ function RandomPosts(props) {
         </PostsContainer>
         <SidebarContainer>
           <Sidebar>
-            <Home />
             <Footer />
           </Sidebar>
         </SidebarContainer>

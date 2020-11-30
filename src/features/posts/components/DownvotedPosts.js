@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import Post from "./Post";
-
-import Header from "../../header/components/Header";
-import Home from "./Home";
-import Footer from "./Footer";
 import styled from "styled-components";
+import Post from "./Post";
+import Header from "../../header/components/Header";
+import Footer from "./Footer";
 
 function DownvotedPosts(props) {
   const [posts, setPosts] = React.useState([]);
@@ -103,7 +101,6 @@ function DownvotedPosts(props) {
         </PostsContainer>
         <SidebarContainer>
           <Sidebar>
-            <Home />
             <Footer />
           </Sidebar>
         </SidebarContainer>

@@ -7,7 +7,8 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  background-color: #333;
+  background-color: #262626;
+  border-bottom: 1px solid #808080;
 `;
 
 const Container = styled.div`
@@ -71,12 +72,6 @@ const Home = styled.div`
   color: white;
   text-decoration: none;
 `;
-
-// const Notifications = styled.div`
-//   height: 20px;
-//   width: 20px;
-//   color: ${(props) => props.theme.secondary};
-// `;
 
 const Submit = styled.div`
   height: 20px;
