@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { MdAccountBalance } from "react-icons/md";
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -73,13 +74,7 @@ const Home = styled.div`
   text-decoration: none;
 `;
 
-const Submit = styled.div`
-  height: 20px;
-  width: 20px;
-  color: white;
-  display: block;
-`;
-const MeniNavigation = styled.div`
+const MenuNavigation = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,36 +127,33 @@ function Header(props) {
             {showState ? (
               <Meni>
                 <MeniStyledNavLink exact to="/sort/upvoted">
-                  <MeniNavigation>
+                  <MenuNavigation>
                     <Navigation>Upvotes</Navigation>
-                  </MeniNavigation>
+                  </MenuNavigation>
                 </MeniStyledNavLink>{" "}
                 <MeniStyledNavLink exact to="/sort/downvoted">
-                  <MeniNavigation>
+                  <MenuNavigation>
                     <Navigation>Downvotes</Navigation>
-                  </MeniNavigation>
+                  </MenuNavigation>
                 </MeniStyledNavLink>{" "}
                 <MeniStyledNavLink exact to="/sort/random">
-                  <MeniNavigation>
+                  <MenuNavigation>
                     <Navigation>Random</Navigation>
-                  </MeniNavigation>
+                  </MenuNavigation>
                 </MeniStyledNavLink>{" "}
                 <MeniStyledNavLink exact to="/sort/lastadded">
-                  <MeniNavigation>
+                  <MenuNavigation>
                     <Navigation>Lastadded</Navigation>
-                  </MeniNavigation>
+                  </MenuNavigation>
                 </MeniStyledNavLink>
               </Meni>
             ) : null}
           </Meni>
           <StyledNavLink onClick={exitMenu} exact to="/">
             <IconWrapper>
-              <Home>Home</Home>
-            </IconWrapper>
-          </StyledNavLink>
-          <StyledNavLink onClick={exitMenu} exact to="/confessions">
-            <IconWrapper>
-              <Submit>Confession</Submit>
+              <Home>
+                <MdAccountBalance to="/" />
+              </Home>
             </IconWrapper>
           </StyledNavLink>
         </Nav>
