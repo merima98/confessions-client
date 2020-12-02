@@ -8,7 +8,7 @@ import DownvotedPosts from "./features/posts/components/DownvotedPosts";
 import LastAddedPosts from "./features/posts/components/LastAddedPosts";
 import Header from "./features/header/components/Header";
 
-import "./App.css";
+// import "./App.css";
 
 const app = (props) => {
   return (

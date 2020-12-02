@@ -1,6 +1,7 @@
 import React from "react";
 import { formatDistanceToNow } from "date-fns";
 import styled from "styled-components";
+import { BREAKPOINTS } from "../../../constants";
 
 const StyledPost = styled.div`
   display: flex;
@@ -27,12 +28,15 @@ const Main = styled.main`
 
 const Body = styled.p`
   word-wrap: break-word;
-  color: white;
+  color: #b0b3b8;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    font: 7px Segoe UI Historic;
+  }
 `;
 
 const Time = styled.span`
-  font-size: 0.8rem;
   color: white;
+  font: 7px Segoe UI Historic;
 `;
 
 function Post(props) {

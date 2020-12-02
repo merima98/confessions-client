@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import Post from "./Post";
 import Header from "../../header/components/Header";
 import Footer from "./Footer";
+import { BREAKPOINTS } from "../../../constants";
 
 const { REACT_APP_HOST } = process.env;
 const { REACT_APP_PORT } = process.env;
@@ -18,24 +19,14 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   padding: 64px 20px;
-  max-width: 992px;
-  width: 40%;
-  margin: 0 auto;
 
-  @media (min-width: 992px) {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 20px;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    max-width: 992px;
+    width: 40%;
+    margin: 0 auto;
   }
 `;
-const PostsContainer = styled.div`
-  margin: 0 auto;
-  width: 100%;
-  @media (min-width: 1090px) {
-    padding-left: 5%;
-    height: 100%;
-  }
-`;
+const PostsContainer = styled.div``;
 
 const SidebarContainer = styled.div`
   display: none;
@@ -44,9 +35,10 @@ const SidebarContainer = styled.div`
   right: 0.5rem;
   position: fixed;
 
-  @media (min-width: 300px) {
-    display: fixed;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    display: block;
     flex-direction: column;
+    padding-top: 8px;
     width: 25%;
   }
 `;
@@ -54,6 +46,7 @@ const SidebarContainer = styled.div`
 const Sidebar = styled.div`
   position: sticky;
   top: 64px;
+  font: 13px Segoe UI Historic;
 `;
 const Approve = styled.div`
   background-color: #262626;
@@ -63,10 +56,12 @@ const Approve = styled.div`
   height: 25px;
   display: block;
   margin-bottom: 2px;
+  font: 9px Segoe UI Historic;
+
   &:hover {
     background-color: #4d4d4d;
   }
-  @media (min-width: 1090px) {
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     padding: 2px 40px;
     display: inline;
   }
@@ -79,10 +74,12 @@ const Condemn = styled.div`
   height: 25px;
   display: block;
   margin-bottom: 2px;
+  font: 9px Segoe UI Historic;
+
   &:hover {
     background-color: #4d4d4d;
   }
-  @media (min-width: 1090px) {
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     padding: 2px 40px;
     display: inline;
   }
@@ -90,51 +87,48 @@ const Condemn = styled.div`
 
 const PostsDiv = styled.div`
   margin: 0 auto;
-  width: 50%;
   background-color: #262626;
-  border-radius: 1%;
+  border-radius: 20px;
   padding-bottom: 10%;
   margin-bottom: 5%;
   margin-top: 5%;
   padding-top: 10%;
   padding-left: 15%;
   padding-right: 30%;
-  @media (min-width: 1090px) {
-    width: 100%;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     background-color: #262626;
   }
 `;
 
 const FormPosts = styled.form`
   margin: 0 auto;
-  width: 50%;
   background-color: #262626;
-  border-radius: 1%;
-  padding-bottom: 10%;
-  margin-bottom: 5%;
-  margin-top: 5%;
+  border-radius: 20px;
   padding-top: 10%;
-  padding-left: 15%;
-  padding-right: 30%;
-  @media (min-width: 1090px) {
-    width: 100%;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     background-color: #262626;
+    padding-top: 5%;
   }
 `;
 const LabelPosts = styled.label`
-  background-color: #262626;
-
+  // background-color: #262626;
   color: white;
   text-align: center;
   display: block;
   padding-top: 4px;
   padding-bottom: 8px;
   height: 5%;
+
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    font: 9px Segoe UI Historic;
+    padding-bottom: 4px;
+    height: 0%;
+    padding-top: 0px;
+  }
 `;
 
 const SpanPosts = styled.span`
   background-color: #262626;
-
   color: white;
   text-align: center;
   display: block;
@@ -143,45 +137,44 @@ const SpanPosts = styled.span`
   height: 5%;
 `;
 const PostsTextArea = styled.textarea`
-  top: 20px;
-  left: 20px;
-  bottom: 30px;
-  color: white;
-  align-items: center;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-  overflow-y: visible;
+  color: #b0b3b8;
+  width: 54%;
   resize: none;
-  background-color: #262626;
-  border-radius: 3%;
-  padding-bottom: 10%;
-  margin-top: 5%;
+  background-color: #3a3b3c;
+  border-radius: 20px;
+  padding-bottom: 5%;
   padding-top: 10%;
   padding-left: 15%;
   padding-right: 30%;
-  @media (min-width: 1090px) {
-    width: 70%;
-    background-color: #262626;
+  border-color: #3a3b3c;
+  font: 13px Segoe UI Historic;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    &:hover {
+      background-color: #48494a;
+      cursor: pointer;
+    }
+    padding-top: 10px;
+    font: 9px Segoe UI Historic;
+    padding-bottom: 0%;
   }
 `;
 const SaveButton = styled.div`
-  background-color: #262626;
   cursor: pointer;
   color: #999999;
-  padding: 2px 20px;
-  height: 25px;
-  display: block;
+  padding: 1px 40px;
+  display: inline;
+  font: 8px Segoe UI Historic;
+  margin-left: 35%;
 
-  margin-bottom: 2px;
   &:hover {
     background-color: #4d4d4d;
   }
-  @media (min-width: 1090px) {
-    padding: 2px 40px;
-    display: inline;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    padding: 1px 40px;
+    margin-left: 30%;
   }
 `;
+
 function handleAprove(id) {
   console.log(id);
 }
@@ -260,7 +253,6 @@ function UpvotedPosts(props) {
             >
               Leave post
             </SaveButton>
-            <br />
           </FormPosts>
           {posts.map((post) => {
             return (
