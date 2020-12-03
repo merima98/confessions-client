@@ -174,15 +174,8 @@ const SaveButton = styled.div`
   }
 `;
 
-function handleAprove(id) {
-  console.log(id);
-}
-function handleCondemn(id) {
-  console.log(id);
-}
 function Posts(props) {
   const [posts, setPosts] = React.useState([]);
-
   const validationSchema = Yup.object().shape({
     body: Yup.string()
       .max(280, "Max 280 characters")
@@ -201,9 +194,7 @@ function Posts(props) {
         body: values,
       })
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        props.history.push("/");
+        props.history.push("sort/lastadded");
       });
   }
 
@@ -213,12 +204,35 @@ function Posts(props) {
         `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`
       );
       const data = await response.json();
-      console.log(data);
       setPosts(data.posts);
     } catch (err) {
       console.log(err);
     }
   }, [setPosts]);
+
+  function handleAprove(id) {
+    axios
+      .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${1}`)
+      .then(async () => {
+        const response = await fetch(
+          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`
+        );
+        const data = await response.json();
+        setPosts(data.posts);
+      });
+  }
+
+  function handleCondemn(id) {
+    axios
+      .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${0}`)
+      .then(async () => {
+        const response = await fetch(
+          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`
+        );
+        const data = await response.json();
+        setPosts(data.posts);
+      });
+  }
 
   return (
     <Wrapper>
@@ -258,10 +272,10 @@ function Posts(props) {
               <PostsDiv key={post._id}>
                 <Post key={post._id} body={post.body} date={post.date} />
                 <Approve onClick={() => handleAprove(post._id)}>
-                  Approve
+                  Approve {post.totalUpvotes}
                 </Approve>{" "}
                 <Condemn onClick={() => handleCondemn(post._id)}>
-                  Condemn{" "}
+                  Condemn {post.totalDownvotes}
                 </Condemn>
               </PostsDiv>
             );

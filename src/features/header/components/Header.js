@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { MdAccountBalance } from "react-icons/md";
+import { MdComment } from "react-icons/md";
 
 import { BREAKPOINTS } from "../../../constants";
 
@@ -69,7 +69,7 @@ function Header(props) {
     <StyledHeader>
       <Container>
         <Home exact to="/">
-          <MdAccountBalance to="/" />
+          <MdComment to="/" />
         </Home>
       </Container>
     </StyledHeader>

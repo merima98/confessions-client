@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 
 import Post from "./Post";
 import Header from "../../header/components/Header";
@@ -100,111 +98,30 @@ const PostsDiv = styled.div`
   }
 `;
 
-const FormPosts = styled.form`
-  margin: 0 auto;
-  background-color: #262626;
-  border-radius: 20px;
-  padding-top: 10%;
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    background-color: #262626;
-    padding-top: 5%;
-  }
-`;
-const LabelPosts = styled.label`
-  // background-color: #262626;
-  color: white;
-  text-align: center;
-  display: block;
-  padding-top: 4px;
-  padding-bottom: 8px;
-  height: 5%;
-
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    font: 9px Segoe UI Historic;
-    padding-bottom: 4px;
-    height: 0%;
-    padding-top: 0px;
-  }
-`;
-
-const SpanPosts = styled.span`
-  background-color: #262626;
-  color: white;
-  text-align: center;
-  display: block;
-  padding-top: 4px;
-  padding-bottom: 8px;
-  height: 5%;
-`;
-const PostsTextArea = styled.textarea`
-  color: #b0b3b8;
-  width: 54%;
-  resize: none;
-  background-color: #3a3b3c;
-  border-radius: 20px;
-  padding-bottom: 5%;
-  padding-top: 10%;
-  padding-left: 15%;
-  padding-right: 30%;
-  border-color: #3a3b3c;
-  font: 13px Segoe UI Historic;
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    &:hover {
-      background-color: #48494a;
-      cursor: pointer;
-    }
-    padding-top: 10px;
-    font: 9px Segoe UI Historic;
-    padding-bottom: 0%;
-  }
-`;
-const SaveButton = styled.div`
-  cursor: pointer;
-  color: #999999;
-  padding: 1px 40px;
-  display: inline;
-  font: 8px Segoe UI Historic;
-  margin-left: 35%;
-
-  &:hover {
-    background-color: #4d4d4d;
-  }
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 1px 40px;
-    margin-left: 30%;
-  }
-`;
-
-function handleAprove(id) {
-  console.log(id);
-}
-function handleCondemn(id) {
-  console.log(id);
-}
 function LastAddedPosts(props) {
   const [posts, setPosts] = React.useState([]);
 
-  const validationSchema = Yup.object().shape({
-    body: Yup.string()
-      .max(280, "Max 280 characters")
-      .min(20, "Must enter minimum 20 charasters!"),
-  });
-  const formik = useFormik({
-    validationSchema,
-    initialValues: {
-      body: props.body || "",
-    },
-  });
-
-  function onSubmit(values) {
+  function handleAprove(id) {
     axios
-      .post(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/`, {
-        body: values,
-      })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        props.history.push("/");
+      .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${1}`)
+      .then(async () => {
+        const response = await fetch(
+          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/4`
+        );
+        const data = await response.json();
+        setPosts(data.posts);
+      });
+  }
+
+  function handleCondemn(id) {
+    axios
+      .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${0}`)
+      .then(async () => {
+        const response = await fetch(
+          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/4`
+        );
+        const data = await response.json();
+        setPosts(data.posts);
       });
   }
 
@@ -214,7 +131,6 @@ function LastAddedPosts(props) {
         `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/4`
       );
       const data = await response.json();
-      console.log(data);
       setPosts(data.posts);
     } catch (err) {
       console.log(err);
@@ -226,43 +142,15 @@ function LastAddedPosts(props) {
       <Header />
       <Container>
         <PostsContainer>
-          <FormPosts onSubmit={formik.handleSubmit}>
-            <LabelPosts>Write new post here!</LabelPosts>
-
-            {formik.touched.body && formik.errors.body && (
-              <SpanPosts>{formik.errors.body}</SpanPosts>
-            )}
-
-            <PostsTextArea
-              type="text"
-              name="body"
-              placeholder="What are you thinking about?"
-              value={formik.values.body}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-
-            <SaveButton
-              type="submit"
-              disabled={
-                formik.isSubmitting ||
-                formik.errors.body ||
-                formik.values.body.length === 0
-              }
-              onClick={() => onSubmit(formik.values.body)}
-            >
-              Leave post
-            </SaveButton>
-          </FormPosts>
           {posts.map((post) => {
             return (
               <PostsDiv key={post._id}>
                 <Post key={post._id} body={post.body} date={post.date} />
                 <Approve onClick={() => handleAprove(post._id)}>
-                  Approve
+                  Approve {post.totalUpvotes}
                 </Approve>{" "}
                 <Condemn onClick={() => handleCondemn(post._id)}>
-                  Condemn{" "}
+                  Condemn {post.totalDownvotes}
                 </Condemn>
               </PostsDiv>
             );
