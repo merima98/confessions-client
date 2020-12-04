@@ -58,7 +58,7 @@ const Filters = styled.div`
     font: 9px Segoe UI Historic;
   }
 `;
-function Footer() {
+function Footer(props) {
   return (
     <Tile>
       <Filters>Filters</Filters>

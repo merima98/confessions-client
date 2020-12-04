@@ -19,7 +19,6 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   padding: 64px 20px;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     max-width: 992px;
     width: 40%;
@@ -34,7 +33,6 @@ const SidebarContainer = styled.div`
   top: 10%;
   right: 0.5rem;
   position: fixed;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     display: block;
     flex-direction: column;
@@ -57,7 +55,6 @@ const Approve = styled.div`
   display: block;
   margin-bottom: 2px;
   font: 7px Segoe UI Historic;
-
   &:hover {
     background-color: #4d4d4d;
   }
@@ -75,7 +72,6 @@ const Condemn = styled.div`
   display: block;
   margin-bottom: 2px;
   font: 7px Segoe UI Historic;
-
   &:hover {
     background-color: #4d4d4d;
   }
@@ -117,7 +113,6 @@ const LabelPosts = styled.label`
   padding-top: 4px;
   padding-bottom: 8px;
   height: 5%;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     font: 9px Segoe UI Historic;
     padding-bottom: 4px;
@@ -164,7 +159,6 @@ const SaveButton = styled.div`
   display: inline;
   font: 8px Segoe UI Historic;
   margin-left: 35%;
-
   &:hover {
     background-color: #4d4d4d;
   }

@@ -5,6 +5,7 @@ import axios from "axios";
 import Post from "./Post";
 import Header from "../../header/components/Header";
 import Footer from "./Footer";
+import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
 
 const { REACT_APP_HOST } = process.env;
@@ -17,7 +18,6 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   padding: 64px 20px;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     max-width: 992px;
     width: 40%;
@@ -32,7 +32,6 @@ const SidebarContainer = styled.div`
   top: 10%;
   right: 0.5rem;
   position: fixed;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     display: block;
     flex-direction: column;
@@ -55,7 +54,6 @@ const Approve = styled.div`
   display: block;
   margin-bottom: 2px;
   font: 9px Segoe UI Historic;
-
   &:hover {
     background-color: #4d4d4d;
   }
@@ -73,7 +71,6 @@ const Condemn = styled.div`
   display: block;
   margin-bottom: 2px;
   font: 9px Segoe UI Historic;
-
   &:hover {
     background-color: #4d4d4d;
   }
@@ -100,17 +97,57 @@ const PostsDiv = styled.div`
 
 function DownvotedPosts(props) {
   const [posts, setPosts] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const [totalPage, setTotalPage] = React.useState(0);
+
+  const zadnjaStrana = totalPage;
 
   function handleAprove(id) {
     axios
       .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${1}`)
       .then(async () => {
         const response = await fetch(
-          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/3`
+          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/2/${0}`
         );
         const data = await response.json();
         setPosts(data.posts);
       });
+  }
+  async function loadPosts(currentPage) {
+    let nextPage = Number(currentPage) + Number(1);
+
+    try {
+      const response = await fetch(
+        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/3/${nextPage}`
+      );
+      const data = await response.json();
+      setPosts(data.posts);
+      setCurrentPage(data.pagination.current_page);
+      setTotalPage(data.pagination.total_page);
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function loadPreviousPosts(currentPage) {
+    let nextPage = Number(currentPage) - Number(1);
+
+    try {
+      const response = await fetch(
+        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/3/${nextPage}`
+      );
+      const data = await response.json();
+      setPosts(data.posts);
+      setCurrentPage(data.pagination.current_page);
+      // setTotalItems(data.pagination.total_item_count);
+      setTotalPage(data.pagination.total_page);
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function handleCondemn(id) {
@@ -118,7 +155,7 @@ function DownvotedPosts(props) {
       .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${0}`)
       .then(async () => {
         const response = await fetch(
-          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/3`
+          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/3/${0}`
         );
         const data = await response.json();
         setPosts(data.posts);
@@ -128,14 +165,18 @@ function DownvotedPosts(props) {
   useEffect(async () => {
     try {
       const response = await fetch(
-        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/3`
+        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/sort/3/${0}`
       );
       const data = await response.json();
       setPosts(data.posts);
+      setCurrentPage(data.pagination.current_page);
+      setTotalPage(data.pagination.total_page);
+
+      console.log(data);
     } catch (err) {
       console.log(err);
     }
-  }, [setPosts]);
+  }, [setPosts, setCurrentPage]);
 
   return (
     <Wrapper>
@@ -156,6 +197,13 @@ function DownvotedPosts(props) {
             );
           })}
         </PostsContainer>
+        <Paginator
+          currentPage={currentPage}
+          lastPage={totalPage}
+          zadnjaStrana={zadnjaStrana}
+          onNext={() => loadPosts(currentPage)}
+          onPrevious={() => loadPreviousPosts(currentPage)}
+        />
         <SidebarContainer>
           <Sidebar>
             <Footer />
