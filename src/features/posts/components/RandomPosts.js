@@ -27,15 +27,15 @@ const Container = styled.div`
 const PostsContainer = styled.div``;
 
 const SidebarContainer = styled.div`
-  display: none;
-  width: 50%;
-  top: 10%;
+  margin-bottom: 0;
   right: 0.5rem;
-  position: fixed;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     display: block;
     flex-direction: column;
     padding-top: 8px;
+    position: fixed;
+    top: 10%;
+
     width: 25%;
   }
 `;

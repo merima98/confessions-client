@@ -8,27 +8,23 @@ const PaginatorControls = styled.div`
 
 const PaginatorControl = styled.button`
   width: 5rem;
-  padding: 0.25rem 0;
+  padding: 0.2rem 0;
   margin: 0 1rem;
-  border: 1px solid #3b0062;
+  border: 1px solid #999999;
   background: transparent;
   font: inherit;
   cursor: pointer;
-  font-size: 1rem;
-  color: #3b0062;
+  font-size: 0.5rem;
+  color: #999999;
 
   &.active {
-    color: #fab83f;
-    border-color: #fab83f;
+    color: #4d4d4d;
+    border-color: #4d4d4d;
   }
 
   &:hover {
-    color: #fab83f;
-    border-color: #fab83f;
-  }
-
-  &:hover {
-    outline: none;
+    color: #4d4d4d;
+    border-color: #4d4d4d;
   }
 `;
 

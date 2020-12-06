@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 import { BREAKPOINTS } from "../../../constants";
 
 const Tile = styled.footer`
-  padding: 10px;
+  // padding: 10px;
   border-radius: 1px;
-  padding: 64px 0px;
+  // padding: 64px 0px;
+  // bottom: 0;
 
   @media (min-width: 992px) {
     font: 10px Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
