@@ -100,7 +100,7 @@ function DownvotedPosts(props) {
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalPage, setTotalPage] = React.useState(0);
 
-  const zadnjaStrana = totalPage;
+  const pages = totalPage;
 
   function handleAprove(id) {
     axios
@@ -200,7 +200,7 @@ function DownvotedPosts(props) {
         <Paginator
           currentPage={currentPage}
           lastPage={totalPage}
-          zadnjaStrana={zadnjaStrana}
+          pages={pages}
           onNext={() => loadPosts(currentPage)}
           onPrevious={() => loadPreviousPosts(currentPage)}
         />

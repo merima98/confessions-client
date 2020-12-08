@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useFormik } from "formik";
-import * as Yup from "yup";
 
 import Post from "./Post";
 import Header from "../../header/components/Header";
 import Footer from "./Footer";
+import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
 
 const { REACT_APP_HOST } = process.env;
@@ -36,7 +35,6 @@ const SidebarContainer = styled.div`
     padding-top: 8px;
     position: fixed;
     top: 10%;
-
     width: 25%;
   }
 `;
@@ -54,7 +52,7 @@ const Approve = styled.div`
   height: 25px;
   display: block;
   margin-bottom: 2px;
-  font: 7px Segoe UI Historic;
+  font: 9px Segoe UI Historic;
   &:hover {
     background-color: #4d4d4d;
   }
@@ -71,7 +69,7 @@ const Condemn = styled.div`
   height: 25px;
   display: block;
   margin-bottom: 2px;
-  font: 7px Segoe UI Historic;
+  font: 9px Segoe UI Historic;
   &:hover {
     background-color: #4d4d4d;
   }
@@ -96,124 +94,59 @@ const PostsDiv = styled.div`
   }
 `;
 
-const FormPosts = styled.form`
-  margin: 0 auto;
-  background-color: #262626;
-  border-radius: 20px;
-  padding-top: 10%;
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    background-color: #262626;
-    padding-top: 5%;
-  }
-`;
-const LabelPosts = styled.label`
-  color: white;
-  text-align: center;
-  display: block;
-  padding-top: 4px;
-  padding-bottom: 8px;
-  height: 5%;
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    font: 9px Segoe UI Historic;
-    padding-bottom: 4px;
-    height: 0%;
-    padding-top: 0px;
-  }
-`;
-
-const SpanPosts = styled.span`
-  background-color: #262626;
-  color: white;
-  text-align: center;
-  display: block;
-  padding-top: 4px;
-  padding-bottom: 8px;
-  height: 5%;
-`;
-const PostsTextArea = styled.textarea`
-  color: #b0b3b8;
-  width: 54%;
-  resize: none;
-  background-color: #3a3b3c;
-  border-radius: 20px;
-  padding-bottom: 5%;
-  padding-top: 10%;
-  padding-left: 15%;
-  padding-right: 30%;
-  border-color: #3a3b3c;
-  font: 13px Segoe UI Historic;
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    &:hover {
-      background-color: #48494a;
-      cursor: pointer;
-    }
-    padding-top: 10px;
-    font: 9px Segoe UI Historic;
-    padding-bottom: 0%;
-  }
-`;
-const SaveButton = styled.div`
-  cursor: pointer;
-  color: #999999;
-  padding: 1px 40px;
-  display: inline;
-  font: 8px Segoe UI Historic;
-  margin-left: 35%;
-  &:hover {
-    background-color: #4d4d4d;
-  }
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 1px 40px;
-    margin-left: 30%;
-  }
-`;
-
 function Posts(props) {
   const [posts, setPosts] = React.useState([]);
-  const validationSchema = Yup.object().shape({
-    body: Yup.string()
-      .max(280, "Max 280 characters")
-      .min(20, "Must enter minimum 20 charasters!"),
-  });
-  const formik = useFormik({
-    validationSchema,
-    initialValues: {
-      body: props.body || "",
-    },
-  });
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const [totalPage, setTotalPage] = React.useState(0);
 
-  function onSubmit(values) {
-    axios
-      .post(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/`, {
-        body: values,
-      })
-      .then((res) => {
-        props.history.push("sort/lastadded");
-      });
-  }
-
-  useEffect(async () => {
-    try {
-      const response = await fetch(
-        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`
-      );
-      const data = await response.json();
-      setPosts(data.posts);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [setPosts]);
+  const pages = totalPage;
 
   function handleAprove(id) {
     axios
       .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${1}`)
       .then(async () => {
         const response = await fetch(
-          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`
+          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${0}`
         );
         const data = await response.json();
         setPosts(data.posts);
       });
+  }
+  async function loadPosts(currentPage) {
+    let nextPage = Number(currentPage) + Number(1);
+
+    try {
+      const response = await fetch(
+        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${nextPage}`
+      );
+      const data = await response.json();
+      setPosts(data.posts);
+      setCurrentPage(data.pagination.current_page);
+      setTotalPage(data.pagination.total_page);
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function loadPreviousPosts(currentPage) {
+    let nextPage = Number(currentPage) - Number(1);
+
+    try {
+      const response = await fetch(
+        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${nextPage}`
+      );
+      const data = await response.json();
+      setPosts(data.posts);
+      setCurrentPage(data.pagination.current_page);
+      // setTotalItems(data.pagination.total_item_count);
+      setTotalPage(data.pagination.total_page);
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   function handleCondemn(id) {
@@ -221,46 +154,34 @@ function Posts(props) {
       .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${0}`)
       .then(async () => {
         const response = await fetch(
-          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`
+          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${0}`
         );
         const data = await response.json();
         setPosts(data.posts);
       });
   }
 
+  useEffect(async () => {
+    try {
+      const response = await fetch(
+        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${0}`
+      );
+      const data = await response.json();
+      setPosts(data.posts);
+      setCurrentPage(data.pagination.current_page);
+      setTotalPage(data.pagination.total_page);
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [setPosts, setCurrentPage]);
+
   return (
     <Wrapper>
       <Header />
       <Container>
         <PostsContainer>
-          <FormPosts onSubmit={formik.handleSubmit}>
-            <LabelPosts>Write new post here!</LabelPosts>
-
-            {formik.touched.body && formik.errors.body && (
-              <SpanPosts>{formik.errors.body}</SpanPosts>
-            )}
-
-            <PostsTextArea
-              type="text"
-              name="body"
-              placeholder="What are you thinking about?"
-              value={formik.values.body}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-
-            <SaveButton
-              type="submit"
-              disabled={
-                formik.isSubmitting ||
-                formik.errors.body ||
-                formik.values.body.length === 0
-              }
-              onClick={() => onSubmit(formik.values.body)}
-            >
-              Leave post
-            </SaveButton>
-          </FormPosts>
           {posts.map((post) => {
             return (
               <PostsDiv key={post._id}>
@@ -275,6 +196,13 @@ function Posts(props) {
             );
           })}
         </PostsContainer>
+        <Paginator
+          currentPage={currentPage}
+          lastPage={totalPage}
+          pages={pages}
+          onNext={() => loadPosts(currentPage)}
+          onPrevious={() => loadPreviousPosts(currentPage)}
+        />
         <SidebarContainer>
           <Sidebar>
             <Footer />

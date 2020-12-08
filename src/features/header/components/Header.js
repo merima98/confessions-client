@@ -63,7 +63,6 @@ const Home = styled(NavLink)`
     }
   }
 `;
-
 function Header(props) {
   return (
     <StyledHeader>
