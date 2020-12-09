@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
 import Posts from "./features/posts/components/Posts";
 import RandomPosts from "./features/posts/components/RandomPosts";
@@ -8,9 +9,16 @@ import DownvotedPosts from "./features/posts/components/DownvotedPosts";
 import LastAddedPosts from "./features/posts/components/LastAddedPosts";
 import Header from "./features/header/components/Header";
 
+import lightTheme from "./themes/light";
+import darkTheme from "./themes/dark";
+
 const app = (props) => {
+  const stored = localStorage.getItem("isDarkMode");
+  const [isDarkMode, setIsDarkMode] = useState(
+    stored === "true" ? true : false
+  );
   return (
-    <div>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <React.Fragment>
         <BrowserRouter>
           <Header />
@@ -23,7 +31,7 @@ const app = (props) => {
           </Switch>
         </BrowserRouter>
       </React.Fragment>
-    </div>
+    </ThemeProvider>
   );
 };
 

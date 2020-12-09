@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
 import axios from "axios";
 
 import Post from "./Post";
@@ -8,12 +8,16 @@ import Footer from "./Footer";
 import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
 
+import lightTheme from "../../../themes/light";
+import darkTheme from "../../../themes/dark";
+
 const { REACT_APP_HOST } = process.env;
 const { REACT_APP_PORT } = process.env;
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  background-color: #000000;
+  // background-color: #000000;
+  background-color: ${(props) => props.theme.colors.body};
 `;
 
 const Container = styled.div`
@@ -99,6 +103,11 @@ function Posts(props) {
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalPage, setTotalPage] = React.useState(0);
 
+  const stored = localStorage.getItem("isDarkMode");
+  const [isDarkMode, setIsDarkMode] = useState(
+    stored === "true" ? true : false
+  );
+
   const pages = totalPage;
 
   function handleAprove(id) {
@@ -178,38 +187,40 @@ function Posts(props) {
   }, [setPosts, setCurrentPage]);
 
   return (
-    <Wrapper>
-      <Header />
-      <Container>
-        <PostsContainer>
-          {posts.map((post) => {
-            return (
-              <PostsDiv key={post._id}>
-                <Post key={post._id} body={post.body} date={post.date} />
-                <Approve onClick={() => handleAprove(post._id)}>
-                  Approve {post.totalUpvotes}
-                </Approve>{" "}
-                <Condemn onClick={() => handleCondemn(post._id)}>
-                  Condemn {post.totalDownvotes}
-                </Condemn>
-              </PostsDiv>
-            );
-          })}
-        </PostsContainer>
-        <Paginator
-          currentPage={currentPage}
-          lastPage={totalPage}
-          pages={pages}
-          onNext={() => loadPosts(currentPage)}
-          onPrevious={() => loadPreviousPosts(currentPage)}
-        />
-        <SidebarContainer>
-          <Sidebar>
-            <Footer />
-          </Sidebar>
-        </SidebarContainer>
-      </Container>
-    </Wrapper>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <Wrapper>
+        <Header />
+        <Container>
+          <PostsContainer>
+            {posts.map((post) => {
+              return (
+                <PostsDiv key={post._id}>
+                  <Post key={post._id} body={post.body} date={post.date} />
+                  <Approve onClick={() => handleAprove(post._id)}>
+                    Approve {post.totalUpvotes}
+                  </Approve>{" "}
+                  <Condemn onClick={() => handleCondemn(post._id)}>
+                    Condemn {post.totalDownvotes}
+                  </Condemn>
+                </PostsDiv>
+              );
+            })}
+          </PostsContainer>
+          <Paginator
+            currentPage={currentPage}
+            lastPage={totalPage}
+            pages={pages}
+            onNext={() => loadPosts(currentPage)}
+            onPrevious={() => loadPreviousPosts(currentPage)}
+          />
+          <SidebarContainer>
+            <Sidebar>
+              <Footer />
+            </Sidebar>
+          </SidebarContainer>
+        </Container>
+      </Wrapper>
+    </ThemeProvider>
   );
 }
 export default Posts;
