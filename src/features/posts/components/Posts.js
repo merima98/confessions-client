@@ -8,8 +8,7 @@ import Footer from "./Footer";
 import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
 
-import lightTheme from "../../../themes/light";
-import darkTheme from "../../../themes/dark";
+import { lightTheme, darkTheme } from "../../../themes/themes";
 
 const { REACT_APP_HOST } = process.env;
 const { REACT_APP_PORT } = process.env;
@@ -149,7 +148,6 @@ function Posts(props) {
       const data = await response.json();
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
-      // setTotalItems(data.pagination.total_item_count);
       setTotalPage(data.pagination.total_page);
 
       console.log(data);

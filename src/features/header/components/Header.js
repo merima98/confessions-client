@@ -4,8 +4,11 @@ import { NavLink } from "react-router-dom";
 import { MdComment } from "react-icons/md";
 
 import { BREAKPOINTS } from "../../../constants";
-import lightTheme from "../../../themes/light";
-import darkTheme from "../../../themes/dark";
+import { lightTheme, darkTheme } from "../../../themes/themes";
+
+import { useLocation } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
 
 const StyledHeader = styled.header`
   position: fixed;
@@ -103,6 +106,22 @@ const Button = styled.button`
 `;
 
 function Header(props) {
+  const usePathname = () => {
+    const location = useLocation();
+    return location.pathname;
+  };
+  let history = useHistory();
+  let path = usePathname();
+  if (path === "/") {
+    path = "/sort/random";
+  } else if (
+    path === "/sort/random" ||
+    path === "/sort/upvoted" ||
+    path === "/sort/downvoted" ||
+    path === "/sort/lastadded"
+  ) {
+    path = "/";
+  }
   const stored = localStorage.getItem("isDarkMode");
   const [isDarkMode, setIsDarkMode] = useState(
     stored === "true" ? true : false
@@ -119,6 +138,10 @@ function Header(props) {
             onClick={() => {
               setIsDarkMode(!isDarkMode);
               localStorage.setItem("isDarkMode", !isDarkMode);
+
+              history.push({
+                pathname: path,
+              });
             }}
           >
             {`${isDarkMode ? `Light` : `Dark`}`}
