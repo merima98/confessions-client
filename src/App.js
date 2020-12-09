@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import { useSelector } from "react-redux";
+
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
@@ -9,10 +12,9 @@ import DownvotedPosts from "./features/posts/components/DownvotedPosts";
 import LastAddedPosts from "./features/posts/components/LastAddedPosts";
 import Header from "./features/header/components/Header";
 
-import lightTheme from "./themes/light";
-import darkTheme from "./themes/dark";
+import { darkTheme, lightTheme } from "./themes/themes";
 
-const app = (props) => {
+function App() {
   const stored = localStorage.getItem("isDarkMode");
   const [isDarkMode, setIsDarkMode] = useState(
     stored === "true" ? true : false
@@ -33,6 +35,6 @@ const app = (props) => {
       </React.Fragment>
     </ThemeProvider>
   );
-};
+}
 
-export default app;
+export default App;
