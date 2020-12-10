@@ -47,7 +47,7 @@ const Sidebar = styled.div`
   font: 13px Segoe UI Historic;
 `;
 const Approve = styled.div`
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
   padding: 2px 20px;
@@ -64,7 +64,7 @@ const Approve = styled.div`
   }
 `;
 const Condemn = styled.div`
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
   padding: 2px 20px;
@@ -83,7 +83,7 @@ const Condemn = styled.div`
 
 const PostsDiv = styled.div`
   margin: 0 auto;
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   border-radius: 20px;
   padding-bottom: 10%;
   margin-bottom: 5%;
@@ -92,23 +92,23 @@ const PostsDiv = styled.div`
   padding-left: 15%;
   padding-right: 30%;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    background-color: #262626;
+    background-color: ${(props) => props.theme.colors.background};
   }
 `;
 
 const FormPosts = styled.form`
   margin: 0 auto;
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   border-radius: 20px;
   padding-top: 10%;
   @media (min-width: 1090px) {
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    background-color: #262626;
+    background-color: ${(props) => props.theme.colors.background};
     padding-top: 5%;
   }
 `;
 const LabelPosts = styled.label`
-  color: white;
+  color: ${(props) => props.theme.colors.color};
   text-align: center;
   display: block;
   padding-top: 4px;
@@ -123,7 +123,7 @@ const LabelPosts = styled.label`
 `;
 
 const SpanPosts = styled.span`
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   color: white;
   text-align: center;
   display: block;
@@ -135,7 +135,7 @@ const PostsTextArea = styled.textarea`
   color: #b0b3b8;
   width: 54%;
   resize: none;
-  background-color: #3a3b3c;
+  background-color: ${(props) => props.theme.colors.newPostBackground};
   border-radius: 20px;
   padding-bottom: 5%;
   padding-top: 10%;
@@ -145,7 +145,7 @@ const PostsTextArea = styled.textarea`
   font: 13px Segoe UI Historic;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     &:hover {
-      background-color: #48494a;
+      background-color: ${(props) => props.theme.colors.newPostHover};
       cursor: pointer;
     }
     padding-top: 10px;

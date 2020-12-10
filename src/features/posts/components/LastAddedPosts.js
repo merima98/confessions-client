@@ -44,7 +44,7 @@ const Sidebar = styled.div`
   font: 13px Segoe UI Historic;
 `;
 const Approve = styled.div`
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
   padding: 2px 20px;
@@ -61,7 +61,7 @@ const Approve = styled.div`
   }
 `;
 const Condemn = styled.div`
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
   padding: 2px 20px;
@@ -80,7 +80,7 @@ const Condemn = styled.div`
 
 const PostsDiv = styled.div`
   margin: 0 auto;
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   border-radius: 20px;
   padding-bottom: 10%;
   margin-bottom: 5%;
@@ -89,7 +89,7 @@ const PostsDiv = styled.div`
   padding-left: 15%;
   padding-right: 30%;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    background-color: #262626;
+    background-color: ${(props) => props.theme.colors.background};
   }
 `;
 

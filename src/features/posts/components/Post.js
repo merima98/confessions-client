@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, format } from "date-fns";
 import styled from "styled-components";
 import { BREAKPOINTS } from "../../../constants";
 
@@ -11,10 +11,10 @@ const StyledPost = styled.div`
     margin-bottom: 20px;
   }
   border-radius: 1px solid #454545;
-  background-color: #262626;
+  background-color: ${(props) => props.theme.colors.background};
   border-bottom: 1px solid #808080;
   height: 100%;
-  color: white;
+  // color: red;
   width: 100%;
 `;
 
@@ -28,19 +28,37 @@ const Main = styled.main`
 
 const Body = styled.p`
   word-wrap: break-word;
-  color: #b0b3b8;
+  color: ${(props) => props.theme.colors.postColor};
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     font: 7px Segoe UI Historic;
   }
 `;
 
 const Time = styled.span`
-  color: white;
+  color: ${(props) => props.theme.colors.color};
   font: 7px Segoe UI Historic;
 `;
 
 function Post(props) {
   const { body, date } = props;
+  // const dateToConvert = formatDistanceToNow(Date.parse(date));
+  // const dateToConvert = Date.parse(date);
+  // const monthNames = [
+  //   "January",
+  //   "February",
+  //   "March",
+  //   "April",
+  //   "May",
+  //   "June",
+  //   "July",
+  //   "August",
+  //   "September",
+  //   "October",
+  //   "November",
+  //   "December",
+  // ];
+  // const month = monthNames[dateToConvert.getMonth()];
+  console.log(format(Date.parse(date), "yyyy/MM/dd kk:mm:ss"));
   return (
     <StyledPost>
       <Header>
