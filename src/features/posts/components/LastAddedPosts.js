@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from "axios";
 
 import Post from "./Post";
-import Header from "../../header/components/Header";
 import Footer from "./Footer";
 import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
@@ -13,7 +12,7 @@ const { REACT_APP_PORT } = process.env;
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  background-color: #000000;
+  background-color: ${(props) => props.theme.colors.body};
 `;
 
 const Container = styled.div`
@@ -25,6 +24,7 @@ const Container = styled.div`
   }
 `;
 const PostsContainer = styled.div``;
+
 const SidebarContainer = styled.div`
   margin-bottom: 0;
   right: 0.5rem;
@@ -178,7 +178,6 @@ function LastAddedPosts(props) {
 
   return (
     <Wrapper>
-      <Header />
       <Container>
         <PostsContainer>
           {posts.map((post) => {

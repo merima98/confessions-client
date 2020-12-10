@@ -1,21 +1,15 @@
-import React, { useState } from "react";
-import styled, { ThemeProvider } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { MdComment } from "react-icons/md";
 
 import { BREAKPOINTS } from "../../../constants";
-import { lightTheme, darkTheme } from "../../../themes/themes";
-
-import { useLocation } from "react-router-dom";
-
-import { useHistory } from "react-router-dom";
 
 const StyledHeader = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  // background-color: #262626;
   background-color: ${(props) => props.theme.colors.background};
   border-bottom: 1px solid #808080;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
@@ -106,49 +100,23 @@ const Button = styled.button`
 `;
 
 function Header(props) {
-  const usePathname = () => {
-    const location = useLocation();
-    return location.pathname;
-  };
-  let history = useHistory();
-  let path = usePathname();
-  if (path === "/") {
-    path = "/sort/random";
-  } else if (
-    path === "/sort/random" ||
-    path === "/sort/upvoted" ||
-    path === "/sort/downvoted" ||
-    path === "/sort/lastadded"
-  ) {
-    path = "/";
-  }
-  const stored = localStorage.getItem("isDarkMode");
-  const [isDarkMode, setIsDarkMode] = useState(
-    stored === "true" ? true : false
-  );
+  console.log("props bro - ", props);
 
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <StyledHeader>
-        <Container>
-          <Home exact to="/">
-            <MdComment to="/" />
-          </Home>
-          <Button
-            onClick={() => {
-              setIsDarkMode(!isDarkMode);
-              localStorage.setItem("isDarkMode", !isDarkMode);
-
-              history.push({
-                pathname: path,
-              });
-            }}
-          >
-            {`${isDarkMode ? `Light` : `Dark`}`}
-          </Button>
-        </Container>
-      </StyledHeader>
-    </ThemeProvider>
+    <StyledHeader>
+      <Container>
+        <Home exact to="/">
+          <MdComment to="/" />
+        </Home>
+        <Button
+          onClick={() => {
+            props.setIsDarkMode(!props.isDarkMode);
+          }}
+        >
+          {`${props.isDarkMode ? `Light` : `Dark`}`}
+        </Button>
+      </Container>
+    </StyledHeader>
   );
 }
 
