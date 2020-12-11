@@ -56,7 +56,7 @@ const Approve = styled.div`
   margin-bottom: 2px;
   font: 9px Segoe UI Historic;
   &:hover {
-    background-color: #4d4d4d;
+    background-color: ${(props) => props.theme.colors.buttonHover};
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     padding: 2px 40px;
@@ -73,7 +73,7 @@ const Condemn = styled.div`
   margin-bottom: 2px;
   font: 9px Segoe UI Historic;
   &:hover {
-    background-color: #4d4d4d;
+    background-color: ${(props) => props.theme.colors.buttonHover};
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     padding: 2px 40px;
@@ -141,7 +141,7 @@ const PostsTextArea = styled.textarea`
   padding-top: 10%;
   padding-left: 15%;
   padding-right: 30%;
-  border-color: #3a3b3c;
+  border-color: ${(props) => props.theme.colors.newPostBorderColor};
   font: 13px Segoe UI Historic;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     &:hover {
@@ -257,7 +257,6 @@ function Posts(props) {
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        // props.history.push("/");
         history.push("/sort/lastadded");
       });
   }

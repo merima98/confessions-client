@@ -139,7 +139,6 @@ function LastAddedPosts(props) {
       const data = await response.json();
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
-      // setTotalItems(data.pagination.total_item_count);
       setTotalPage(data.pagination.total_page);
 
       console.log(data);

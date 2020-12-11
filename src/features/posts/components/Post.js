@@ -12,9 +12,8 @@ const StyledPost = styled.div`
   }
   border-radius: 1px solid #454545;
   background-color: ${(props) => props.theme.colors.background};
-  border-bottom: 1px solid #808080;
+  border-bottom: 0.5px solid ${(props) => props.theme.colors.lineColor};
   height: 100%;
-  // color: red;
   width: 100%;
 `;
 

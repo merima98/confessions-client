@@ -2,14 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { BREAKPOINTS } from "../../../constants";
-
 const Tile = styled.footer`
-  // padding: 10px;
   border-radius: 1px;
-  // padding: 64px 0px;
-  // bottom: 0;
-
   @media (min-width: 992px) {
     font: 10px Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
   }
@@ -19,6 +13,7 @@ const LinksWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 10px;
+  margin-top: 10px;
 `;
 
 const Links = styled.div`
@@ -28,15 +23,15 @@ const Links = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  color: white;
+  color: ${(props) => props.theme.colors.color};
   text-decoration: none;
   padding: 2px;
   cursor: pointer;
   font: 8px Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
 
   &:hover {
-    background-color: #4d4d4d;
-    opacity: 0.5;
+    background-color: ${(props) => props.theme.colors.buttonHover};
+    opacity: 0.6;
     transition: 0.5s;
     border-radius: 7%;
   }
@@ -46,25 +41,15 @@ const Copyright = styled.span`
   font: 8px Segoe UI Historic, Segoe UI, Helvetica, Arial, sans-serif;
   text-align: center;
   display: block;
-  color: white;
-  opacity: 0.5;
+  color: ${(props) => props.theme.colors.color};
+  opacity: 0.8;
   border-top: 0.5px solid #b0b3b8;
   padding-top: 2px;
 `;
-const Filters = styled.div`
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding-top: 20px;
-    padding-bottom: 5px;
-    color: #b0b3b8;
-    text-align: center;
-    font: 9px Segoe UI Historic;
-  }
-`;
+
 function Footer(props) {
   return (
     <Tile>
-      <Filters>Filters</Filters>
-
       <LinksWrapper>
         <Links>
           <StyledLink to="/sort/upvoted">Upvotes</StyledLink>
