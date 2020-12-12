@@ -50,16 +50,24 @@ const Approve = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
-  padding: 2px 20px;
   height: 25px;
-  display: block;
+  display: inline;
+  width: 15%;
+
   margin-bottom: 2px;
-  font: 9px Segoe UI Historic;
+  font: 7px Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 2px 40px;
+    padding: 0;
+    display: inline;
+    width: 25%;
+  }
+`;
+const Buttons = styled.div`
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    width: 50%;
     display: inline;
   }
 `;
@@ -67,17 +75,15 @@ const Condemn = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
-  padding: 2px 20px;
   height: 25px;
-  display: block;
+  display: inline;
   margin-bottom: 2px;
-  font: 9px Segoe UI Historic;
+  font: 7px Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 2px 40px;
-    display: inline;
+    width: 25%;
   }
 `;
 
@@ -168,6 +174,11 @@ const SaveButton = styled.div`
     margin-left: 30%;
   }
 `;
+const validationSchema = Yup.object().shape({
+  body: Yup.string()
+    .max(280, "Max 280 characters")
+    .min(20, "Must enter minimum 20 charasters!"),
+});
 
 function Posts(props) {
   let history = useHistory();
@@ -238,11 +249,6 @@ function Posts(props) {
       });
   }
 
-  const validationSchema = Yup.object().shape({
-    body: Yup.string()
-      .max(280, "Max 280 characters")
-      .min(20, "Must enter minimum 20 charasters!"),
-  });
   const formik = useFormik({
     validationSchema,
     initialValues: {
@@ -310,12 +316,14 @@ function Posts(props) {
             return (
               <PostsDiv key={post._id}>
                 <Post key={post._id} body={post.body} date={post.date} />
-                <Approve onClick={() => handleAprove(post._id)}>
-                  Approve {post.totalUpvotes}
-                </Approve>{" "}
-                <Condemn onClick={() => handleCondemn(post._id)}>
-                  Condemn {post.totalDownvotes}
-                </Condemn>
+                <Buttons>
+                  <Approve onClick={() => handleAprove(post._id)}>
+                    Approve {post.totalUpvotes}
+                  </Approve>{" "}
+                  <Condemn onClick={() => handleCondemn(post._id)}>
+                    Condemn {post.totalDownvotes}
+                  </Condemn>
+                </Buttons>
               </PostsDiv>
             );
           })}
