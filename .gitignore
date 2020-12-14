@@ -8,7 +8,7 @@
 
 # production
 /build
-.debug
+/debug.log
 # misc
 .DS_Store
 .env
