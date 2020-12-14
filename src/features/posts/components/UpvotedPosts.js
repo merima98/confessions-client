@@ -47,49 +47,66 @@ const Approve = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
-  padding: 2px 20px;
-  height: 25px;
-  display: block;
-  margin-bottom: 2px;
-  font: 9px Segoe UI Historic;
+  height: 10px;
+  margin-top: 10px;
+  display: inline;
+  text-align: center;
+
+  flex: 10%;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font: 7px Segoe UI Historic;
   &:hover {
-    background-color: #4d4d4d;
+    background-color: ${(props) => props.theme.colors.buttonHover};
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 2px 40px;
-    display: inline;
+    width: 50%;
+  }
+`;
+const Buttons = styled.div`
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    width: 100%;
   }
 `;
 const Condemn = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
-  padding: 2px 20px;
-  height: 25px;
-  display: block;
-  margin-bottom: 2px;
-  font: 9px Segoe UI Historic;
+  height: 10px;
+  margin-top: 10px;
+  display: inline;
+  text-align: center;
+  flex: 10%;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font: 7px Segoe UI Historic;
   &:hover {
-    background-color: #4d4d4d;
+    background-color: ${(props) => props.theme.colors.buttonHover};
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 2px 40px;
-    display: inline;
+    width: 50%;
   }
 `;
 
 const PostsDiv = styled.div`
-  margin: 0 auto;
   background-color: ${(props) => props.theme.colors.background};
+
   border-radius: 20px;
-  padding-bottom: 10%;
-  margin-bottom: 5%;
+  padding-bottom: 1%;
   margin-top: 5%;
-  padding-top: 10%;
-  padding-left: 15%;
-  padding-right: 30%;
+  padding-left: 5%;
+  padding-right: 5%;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     background-color: ${(props) => props.theme.colors.background};
+    padding-right: 10%;
+    padding-left: 10%;
   }
 `;
 function UpvotedPosts(props) {
@@ -182,12 +199,14 @@ function UpvotedPosts(props) {
             return (
               <PostsDiv key={post._id}>
                 <Post key={post._id} body={post.body} date={post.date} />
-                <Approve onClick={() => handleAprove(post._id)}>
-                  Approve {post.totalUpvotes}
-                </Approve>{" "}
-                <Condemn onClick={() => handleCondemn(post._id)}>
-                  Condemn {post.totalDownvotes}
-                </Condemn>
+                <Buttons>
+                  <Approve onClick={() => handleAprove(post._id)}>
+                    Approve {post.totalUpvotes}
+                  </Approve>{" "}
+                  <Condemn onClick={() => handleCondemn(post._id)}>
+                    Condemn {post.totalDownvotes}
+                  </Condemn>
+                </Buttons>
               </PostsDiv>
             );
           })}

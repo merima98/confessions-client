@@ -50,55 +50,66 @@ const Approve = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
-  height: 25px;
+  height: 10px;
+  margin-top: 10px;
   display: inline;
-  width: 15%;
+  text-align: center;
 
-  margin-bottom: 2px;
+  flex: 10%;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
   font: 7px Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 0;
-    display: inline;
-    width: 25%;
+    width: 50%;
   }
 `;
 const Buttons = styled.div`
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    width: 50%;
-    display: inline;
+    width: 100%;
   }
 `;
 const Condemn = styled.div`
   background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
-  height: 25px;
+  height: 10px;
+  margin-top: 10px;
   display: inline;
-  margin-bottom: 2px;
+  text-align: center;
+  flex: 10%;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
   font: 7px Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    width: 25%;
+    width: 50%;
   }
 `;
 
 const PostsDiv = styled.div`
-  margin: 0 auto;
   background-color: ${(props) => props.theme.colors.background};
+
   border-radius: 20px;
-  padding-bottom: 10%;
-  margin-bottom: 5%;
+  padding-bottom: 1%;
   margin-top: 5%;
-  padding-top: 10%;
-  padding-left: 15%;
-  padding-right: 30%;
+  padding-left: 5%;
+  padding-right: 5%;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     background-color: ${(props) => props.theme.colors.background};
+    padding-right: 10%;
+    padding-left: 10%;
   }
 `;
 

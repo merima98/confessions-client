@@ -6,15 +6,12 @@ import { BREAKPOINTS } from "../../../constants";
 const StyledPost = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
   :not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
   border-radius: 1px solid #454545;
   background-color: ${(props) => props.theme.colors.background};
   border-bottom: 0.5px solid ${(props) => props.theme.colors.lineColor};
-  height: 100%;
-  width: 100%;
 `;
 
 const Header = styled.header`
