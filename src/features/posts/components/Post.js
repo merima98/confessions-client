@@ -4,11 +4,6 @@ import styled from "styled-components";
 import { BREAKPOINTS } from "../../../constants";
 
 const StyledPost = styled.div`
-  display: flex;
-  flex-direction: column;
-  :not(:last-child) {
-    margin-bottom: 5px;
-  }
   border-radius: 1px solid #454545;
   background-color: ${(props) => props.theme.colors.background};
   border-bottom: 0.5px solid ${(props) => props.theme.colors.lineColor};
@@ -19,14 +14,15 @@ const Header = styled.header`
 `;
 
 const Main = styled.main`
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 `;
 
 const Body = styled.p`
   word-wrap: break-word;
+  font: 7px Segoe UI Historic;
   color: ${(props) => props.theme.colors.postColor};
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    font: 7px Segoe UI Historic;
+    font: 9px Segoe UI Historic;
   }
 `;
 

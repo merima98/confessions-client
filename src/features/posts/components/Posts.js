@@ -54,7 +54,6 @@ const Approve = styled.div`
   margin-top: 10px;
   display: inline;
   text-align: center;
-
   flex: 10%;
   flex-direction: column;
   padding-top: 5px;
@@ -62,6 +61,7 @@ const Approve = styled.div`
   font: 7px Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
+    border-radius: 2.5%;
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
@@ -72,7 +72,6 @@ const Buttons = styled.div`
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 100%;
   }
@@ -92,6 +91,7 @@ const Condemn = styled.div`
   font: 7px Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
+    border-radius: 2.5%;
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
@@ -100,16 +100,15 @@ const Condemn = styled.div`
 
 const PostsDiv = styled.div`
   background-color: ${(props) => props.theme.colors.background};
-
   border-radius: 20px;
   padding-bottom: 1%;
+  padding-top: 1%;
   margin-top: 5%;
   padding-left: 5%;
   padding-right: 5%;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    background-color: ${(props) => props.theme.colors.background};
-    padding-right: 10%;
-    padding-left: 10%;
+    padding-right: 5%;
+    padding-left: 5%;
   }
 `;
 
@@ -117,10 +116,8 @@ const FormPosts = styled.form`
   margin: 0 auto;
   background-color: ${(props) => props.theme.colors.background};
   border-radius: 20px;
-  padding-top: 10%;
-  @media (min-width: 1090px) {
+  padding-top: 2.5%;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    background-color: ${(props) => props.theme.colors.background};
     padding-top: 5%;
   }
 `;
@@ -131,6 +128,8 @@ const LabelPosts = styled.label`
   padding-top: 4px;
   padding-bottom: 8px;
   height: 5%;
+  font: 7px Segoe UI Historic;
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     font: 9px Segoe UI Historic;
     padding-bottom: 4px;
@@ -155,11 +154,13 @@ const PostsTextArea = styled.textarea`
   background-color: ${(props) => props.theme.colors.newPostBackground};
   border-radius: 20px;
   padding-bottom: 5%;
-  padding-top: 10%;
+  padding-top: 5%;
   padding-left: 15%;
   padding-right: 30%;
+  height: 10px;
+  outline: 0;
   border-color: ${(props) => props.theme.colors.newPostBorderColor};
-  font: 13px Segoe UI Historic;
+  font: 7px Segoe UI Historic;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     &:hover {
       background-color: ${(props) => props.theme.colors.newPostHover};
@@ -168,23 +169,30 @@ const PostsTextArea = styled.textarea`
     padding-top: 10px;
     font: 9px Segoe UI Historic;
     padding-bottom: 0%;
+    height: 20px;
   }
 `;
 const SaveButton = styled.div`
+  background-color: ${(props) => props.theme.colors.background};
   cursor: pointer;
   color: #999999;
-  padding: 1px 40px;
+  height: 10px;
+  margin: 0 auto;
   display: inline;
-  font: 8px Segoe UI Historic;
-  margin-left: 35%;
+  text-align: center;
+  width: 50%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font: 7px Segoe UI Historic;
   &:hover {
-    background-color: #4d4d4d;
+    background-color: ${(props) => props.theme.colors.buttonHover};
+    border-radius: 2.5%;
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 1px 40px;
-    margin-left: 30%;
+    width: 25%;
   }
 `;
+
 const validationSchema = Yup.object().shape({
   body: Yup.string()
     .max(280, "Max 280 characters")
@@ -193,8 +201,6 @@ const validationSchema = Yup.object().shape({
 
 function Posts(props) {
   let history = useHistory();
-
-  console.log("posts - ", props);
   const [posts, setPosts] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalPage, setTotalPage] = React.useState(0);
@@ -223,8 +229,6 @@ function Posts(props) {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -241,8 +245,6 @@ function Posts(props) {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -272,8 +274,6 @@ function Posts(props) {
         body: values,
       })
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
         history.push("/sort/lastadded");
       });
   }
@@ -287,8 +287,6 @@ function Posts(props) {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -311,17 +309,19 @@ function Posts(props) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            <SaveButton
-              type="submit"
-              disabled={
-                formik.isSubmitting ||
-                formik.errors.body ||
-                formik.values.body.length === 0
-              }
-              onClick={() => onSubmit(formik.values.body)}
-            >
-              Leave post
-            </SaveButton>
+            <Buttons>
+              <SaveButton
+                type="submit"
+                disabled={
+                  formik.isSubmitting ||
+                  formik.errors.body ||
+                  formik.values.body.length === 0
+                }
+                onClick={() => onSubmit(formik.values.body)}
+              >
+                Leave post
+              </SaveButton>
+            </Buttons>
           </FormPosts>
           {posts.map((post) => {
             return (

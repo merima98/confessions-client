@@ -14,8 +14,6 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = isDarkMode ? darkTheme : lightTheme;
 
-  console.log("isDarkMode - ", isDarkMode);
-
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>

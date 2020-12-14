@@ -51,7 +51,6 @@ const Approve = styled.div`
   margin-top: 10px;
   display: inline;
   text-align: center;
-
   flex: 10%;
   flex-direction: column;
   padding-top: 5px;
@@ -59,6 +58,7 @@ const Approve = styled.div`
   font: 7px Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
+    border-radius: 2.5%;
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
@@ -69,7 +69,6 @@ const Buttons = styled.div`
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 100%;
   }
@@ -89,6 +88,7 @@ const Condemn = styled.div`
   font: 7px Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
+    border-radius: 2.5%;
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
@@ -97,16 +97,15 @@ const Condemn = styled.div`
 
 const PostsDiv = styled.div`
   background-color: ${(props) => props.theme.colors.background};
-
   border-radius: 20px;
   padding-bottom: 1%;
+  padding-top: 1%;
   margin-top: 5%;
   padding-left: 5%;
   padding-right: 5%;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    background-color: ${(props) => props.theme.colors.background};
-    padding-right: 10%;
-    padding-left: 10%;
+    padding-right: 5%;
+    padding-left: 5%;
   }
 `;
 function UpvotedPosts(props) {
@@ -138,8 +137,6 @@ function UpvotedPosts(props) {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -156,8 +153,6 @@ function UpvotedPosts(props) {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }
@@ -184,8 +179,6 @@ function UpvotedPosts(props) {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-
-      console.log(data);
     } catch (err) {
       console.log(err);
     }

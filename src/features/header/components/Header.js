@@ -80,8 +80,6 @@ const Button = styled.button`
 `;
 
 function Header(props) {
-  console.log("props bro - ", props);
-
   return (
     <StyledHeader>
       <Container>
