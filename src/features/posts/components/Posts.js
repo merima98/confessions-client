@@ -9,6 +9,7 @@ import Post from "./Post";
 import Footer from "./Footer";
 import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
+import NewPostForm from "./NewPostForm";
 
 const { REACT_APP_HOST } = process.env;
 const { REACT_APP_PORT } = process.env;
@@ -21,8 +22,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   padding: 64px 20px;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    max-width: 992px;
-    width: 40%;
+    max-width: 500px;
     margin: 0 auto;
   }
 `;
@@ -296,7 +296,7 @@ function Posts(props) {
     <Wrapper>
       <Container>
         <PostsContainer>
-          <FormPosts onSubmit={formik.handleSubmit}>
+          {/* <FormPosts onSubmit={formik.handleSubmit}>
             <LabelPosts>Write new post here!</LabelPosts>
             {formik.touched.body && formik.errors.body && (
               <SpanPosts>{formik.errors.body}</SpanPosts>
@@ -322,7 +322,8 @@ function Posts(props) {
                 Leave post
               </SaveButton>
             </Buttons>
-          </FormPosts>
+          </FormPosts> */}
+          <NewPostForm />
           {posts.map((post) => {
             return (
               <PostsDiv key={post._id}>
