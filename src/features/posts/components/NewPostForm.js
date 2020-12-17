@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useHistory } from "react-router";
 
 const { REACT_APP_HOST } = process.env;
 const { REACT_APP_PORT } = process.env;
@@ -44,8 +43,6 @@ const validationSchema = Yup.object().shape({
 });
 
 function NewPostForm() {
-  let history = useHistory();
-
   const formik = useFormik({
     initialValues: {
       body: "",
@@ -56,7 +53,6 @@ function NewPostForm() {
 
   function onSubmit(values) {
     console.log("Posted", values);
-
     axios({
       method: "POST",
       url: `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`,
@@ -65,7 +61,7 @@ function NewPostForm() {
       },
       data: values,
     }).then((res) => {
-      history.push("/");
+      setTimeout(() => window.location.reload(), 1000);
     });
   }
 
