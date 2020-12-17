@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import { useHistory } from "react-router";
+
+const { REACT_APP_HOST } = process.env;
+const { REACT_APP_PORT } = process.env;
 
 const Wrapper = styled.div`
   padding: 1rem 0.5rem;
@@ -31,11 +36,6 @@ const SubmitButton = styled.button`
   outline: 0;
 `;
 
-const Error = styled.span`
-  font-size: 0.8rem;
-  color: red;
-`;
-
 const validationSchema = Yup.object().shape({
   body: Yup.string()
     .min(10, "Too Short!")
@@ -44,6 +44,8 @@ const validationSchema = Yup.object().shape({
 });
 
 function NewPostForm() {
+  let history = useHistory();
+
   const formik = useFormik({
     initialValues: {
       body: "",
@@ -54,6 +56,17 @@ function NewPostForm() {
 
   function onSubmit(values) {
     console.log("Posted", values);
+
+    axios({
+      method: "POST",
+      url: `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: values,
+    }).then((res) => {
+      history.push("/");
+    });
   }
 
   return (
@@ -67,8 +80,18 @@ function NewPostForm() {
           value={formik.values.body}
           placeholder="What is on your mind?"
         />
-        <Error>{formik.errors.body}</Error>
-        <SubmitButton>Post</SubmitButton>
+        <SubmitButton
+          type="submit"
+          disabled={!(formik.isValid && formik.dirty)}
+          style={{
+            backgroundColor: !(formik.isValid && formik.dirty)
+              ? "#E4E6EB"
+              : null,
+            color: !(formik.isValid && formik.dirty) ? "#C0C4C8" : null,
+          }}
+        >
+          Post
+        </SubmitButton>
       </form>
     </Wrapper>
   );
