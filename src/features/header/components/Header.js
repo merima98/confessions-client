@@ -36,8 +36,6 @@ const Container = styled.div`
 `;
 
 const Home = styled(NavLink)`
-  /* height: 10px;
-  width: 10px; */
   margin-right: 0.5rem;
   color: black;
   text-decoration: none;

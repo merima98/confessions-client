@@ -1,8 +1,8 @@
 export const darkTheme = {
   colors: {
-    background: "#262626",
-    body: "#000000",
-    newPostBackground: "#3a3b3c",
+    background: "#242526",
+    body: "#18191A",
+    newPostBackground: "#4E4F50",
     color: "#FFFFFF",
     postColor: "#b0b3b8",
     newPostHover: "#48494a",
@@ -16,8 +16,8 @@ export const lightTheme = {
   colors: {
     background: "#fff",
     body: "#F2F3F5",
-    newPostBackground: "#F2F3F5",
-    color: "#000000",
+    newPostBackground: "#f0f2f5",
+    color: "#050505",
     postColor: "#000000",
     newPostHover: "#d9dadc",
     buttonHover: " #f0f2f5",

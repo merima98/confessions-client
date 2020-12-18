@@ -5,14 +5,15 @@ import styled from "styled-components";
 import { BREAKPOINTS } from "../../../constants";
 
 const StyledPost = styled.div`
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.background};
 `;
 
 const Header = styled.header`
   margin: 0.3rem 0;
   height: 0.1rem;
   width: 5rem;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.background};
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 24rem;
     margin: -0.5rem 0;
@@ -24,7 +25,9 @@ const Body = styled.p`
   margin-bottom: 2rem;
 
   font: 13px Segoe UI Historic;
-  color: #050505;
+
+  color: ${(props) => props.theme.colors.color};
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     font-size: 24px;
     font-family: Segoe UI Historic;
@@ -34,6 +37,7 @@ const Time = styled.span`
   color: #65676b;
   font-size: 7.5px;
   font-family: Segoe UI Historic;
+  background-color: ${(props) => props.theme.colors.background};
 
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     font-size: 13px;

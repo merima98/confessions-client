@@ -9,12 +9,12 @@ const { REACT_APP_PORT } = process.env;
 
 const Wrapper = styled.div`
   padding: 1rem 0.5rem;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.background};
   border-radius: 8px;
 `;
 
 const Input = styled.input`
-  background-color: #f0f2f5;
+  background-color: ${(props) => props.theme.colors.newPostBackground};
   padding: 0.5rem;
   border: 0;
   width: 100%;

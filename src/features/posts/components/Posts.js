@@ -86,7 +86,8 @@ const Condemn = styled.div`
 `;
 
 const PostsDiv = styled.div`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.background};
+
   border-radius: 8px;
   padding-bottom: 5%;
   padding-top: 5%;
