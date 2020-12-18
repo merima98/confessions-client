@@ -1,42 +1,50 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { MdHome } from "react-icons/md";
+import {
+  MdAutorenew,
+  MdFilterTiltShift,
+  MdHome,
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
+  MdWbIncandescent,
+} from "react-icons/md";
 
 import { BREAKPOINTS } from "../../../constants";
 
 const StyledHeader = styled.header`
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid #808080;
+
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: ${(props) => props.theme.colors.background};
-  border-bottom: 1px solid #808080;
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 100%;
   }
 `;
 
 const Container = styled.div`
-  max-width: 576px;
-  width: 50%;
-  height: 20px;
   padding: 0 20px;
-  display: flex;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding: 1px 40px;
+    max-width: 500px;
+    margin: 0 auto;
   }
 `;
 
 const Home = styled(NavLink)`
-  height: 10px;
-  width: 10px;
-  color: white;
+  /* height: 10px;
+  width: 10px; */
+  margin-right: 0.5rem;
+  color: black;
   text-decoration: none;
   align-items: center;
 
   &.active {
-    color: white;
+    color: black;
     text-decoration: none;
     width: 20px;
     padding-bottom: 8px;
@@ -52,32 +60,6 @@ const Home = styled(NavLink)`
     }
   }
 `;
-const Button = styled.button`
-  height: 10px;
-  width: 10px;
-  margin-top: 5px;
-  margin-left: 10px;
-  border-radius: 100%;
-  border-color: ${(props) => props.theme.colors.color};
-  background-color: ${(props) => props.theme.colors.color};
-  text-decoration: none;
-  &.active {
-    color: white;
-    text-decoration: none;
-    width: 20px;
-    padding-bottom: 8px;
-  }
-
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    height: 10px;
-    width: 10px;
-    left: 0;
-    margin-top: 5px;
-    &.active {
-      padding-bottom: 0px;
-    }
-  }
-`;
 
 function Header(props) {
   return (
@@ -86,11 +68,27 @@ function Header(props) {
         <Home exact to="/">
           <MdHome to="/" style={{ color: `#1877F2` }} />
         </Home>
-        <Button
+        <MdWbIncandescent
           onClick={() => {
             props.setIsDarkMode(!props.isDarkMode);
           }}
-        ></Button>
+          style={{ color: `#65676b` }}
+        ></MdWbIncandescent>
+        <Home exact to="/sort/lastadded">
+          <MdAutorenew to="/sort/lastadded" style={{ color: `#65676b` }} />
+        </Home>
+        <Home exact to="/sort/upvoted">
+          <MdKeyboardArrowUp to="/sort/upvoted" style={{ color: `#65676b` }} />
+        </Home>{" "}
+        <Home exact to="/sort/downvoted">
+          <MdKeyboardArrowDown
+            to="/sort/downvoted"
+            style={{ color: `#65676b` }}
+          />
+        </Home>
+        <Home exact to="/sort/random">
+          <MdFilterTiltShift to="/sort/random" style={{ color: `#65676b` }} />
+        </Home>
       </Container>
     </StyledHeader>
   );

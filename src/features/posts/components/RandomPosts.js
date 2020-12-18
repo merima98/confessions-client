@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from "axios";
 
 import Post from "./Post";
-import Footer from "./Footer";
 import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
 
@@ -18,88 +17,77 @@ const Wrapper = styled.div`
 const Container = styled.div`
   padding: 64px 20px;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    max-width: 992px;
-    width: 40%;
+    max-width: 500px;
     margin: 0 auto;
   }
 `;
-const PostsContainer = styled.div``;
-
-const SidebarContainer = styled.div`
-  margin-bottom: 0;
-  right: 0.5rem;
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    display: block;
-    flex-direction: column;
-    padding-top: 8px;
-    position: fixed;
-    top: 10%;
-    width: 25%;
-  }
+const PostsContainer = styled.div`
+  width: 100%;
 `;
 
-const Sidebar = styled.div`
-  position: sticky;
-  top: 64px;
-  font: 13px Segoe UI Historic;
-`;
-const Approve = styled.div`
-  background-color: ${(props) => props.theme.colors.background};
-  cursor: pointer;
-  color: #999999;
-  height: 10px;
-  margin-top: 10px;
-  display: inline;
-  text-align: center;
-  flex: 10%;
-  flex-direction: column;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font: 7px Segoe UI Historic;
-  &:hover {
-    background-color: ${(props) => props.theme.colors.buttonHover};
-    border-radius: 2.5%;
-  }
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    width: 50%;
-  }
-`;
 const Buttons = styled.div`
-  width: 70%;
-  margin: 0 auto;
+  width: 100%;
+  margin: -0.375rem -0.125rem;
+  border-bottom: 0.5px solid ${(props) => props.theme.colors.lineColor};
+  border-top: 0.5px solid ${(props) => props.theme.colors.lineColor};
+  padding: 0.75rem;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 100%;
   }
 `;
-const Condemn = styled.div`
-  background-color: ${(props) => props.theme.colors.background};
+
+const Approve = styled.div`
   cursor: pointer;
-  color: #999999;
-  height: 10px;
-  margin-top: 10px;
+  color: #65676b;
+  margin: -0.375rem -0.25rem;
   display: inline;
   text-align: center;
   flex: 10%;
   flex-direction: column;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font: 7px Segoe UI Historic;
+  padding: 0rem 0.75rem;
+  font-size: 7px;
+  font-family: Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
     border-radius: 2.5%;
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
+    font-size: 15px;
+    font-family: Segoe UI Historic;
+  }
+`;
+
+const Condemn = styled.div`
+  cursor: pointer;
+  color: #65676b;
+  margin: -0.375rem -0.25rem;
+  display: inline;
+  text-align: center;
+  flex: 10%;
+  flex-direction: column;
+  padding: 0rem 0.75rem;
+  font-size: 7px;
+  font-family: Segoe UI Historic;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.buttonHover};
+    border-radius: 2.5%;
+  }
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    width: 50%;
+    font-size: 15px;
+    font-family: Segoe UI Historic;
   }
 `;
 
 const PostsDiv = styled.div`
-  background-color: ${(props) => props.theme.colors.background};
-  border-radius: 20px;
-  padding-bottom: 1%;
-  padding-top: 1%;
+  background-color: #fff;
+  border-radius: 8px;
+  padding-bottom: 5%;
+  padding-top: 5%;
   margin-top: 5%;
   padding-left: 5%;
   padding-right: 5%;
@@ -212,11 +200,6 @@ function RandomPosts(props) {
           onNext={() => loadPosts(currentPage)}
           onPrevious={() => loadPreviousPosts(currentPage)}
         />
-        <SidebarContainer>
-          <Sidebar>
-            <Footer />
-          </Sidebar>
-        </SidebarContainer>
       </Container>
     </Wrapper>
   );

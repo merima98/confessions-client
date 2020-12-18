@@ -20,7 +20,7 @@ export const lightTheme = {
     color: "#000000",
     postColor: "#000000",
     newPostHover: "#d9dadc",
-    buttonHover: " #d9dadc",
+    buttonHover: " #f0f2f5",
     newPostBorderColor: "#F2F3F5",
     lineColor: "#d9dadc",
   },

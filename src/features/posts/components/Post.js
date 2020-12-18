@@ -1,38 +1,64 @@
 import React from "react";
 import { format } from "date-fns";
 import styled from "styled-components";
+
 import { BREAKPOINTS } from "../../../constants";
 
 const StyledPost = styled.div`
-  border-radius: 1px solid #454545;
-  background-color: ${(props) => props.theme.colors.background};
-  border-bottom: 0.5px solid ${(props) => props.theme.colors.lineColor};
+  background-color: #ffffff;
 `;
 
 const Header = styled.header`
-  margin-bottom: 8px;
-`;
-
-const Main = styled.main`
-  margin-bottom: 4px;
-`;
-
-const Body = styled.p`
-  word-wrap: break-word;
-  font: 7px Segoe UI Historic;
-  color: ${(props) => props.theme.colors.postColor};
+  margin: 0.3rem 0;
+  height: 0.1rem;
+  width: 5rem;
+  background-color: #ffffff;
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    font: 9px Segoe UI Historic;
+    width: 24rem;
+    margin: -0.5rem 0;
+    height: 1.6rem;
+  }
+`;
+const Body = styled.p`
+  width: 100%;
+  margin-bottom: 2rem;
+
+  font: 13px Segoe UI Historic;
+  color: #050505;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    font-size: 24px;
+    font-family: Segoe UI Historic;
+  }
+`;
+const Time = styled.span`
+  color: #65676b;
+  font-size: 7.5px;
+  font-family: Segoe UI Historic;
+
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    font-size: 13px;
   }
 `;
 
-const Time = styled.span`
-  color: ${(props) => props.theme.colors.color};
-  font: 7px Segoe UI Historic;
+const Likes = styled.div`
+  width: 100%;
+  margin-bottom: 1rem;
+`;
+const Like = styled.span`
+  width: 50%;
+  color: #65676b;
+  text-align: center;
+  margin-right: 1rem;
+  font-size: 7px;
+  font-family: Segoe UI Historic;
+
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    font-size: 15px;
+  }
 `;
 
 function Post(props) {
-  const { body, date } = props;
+  const { body, date, totalDownvotes, totalUpvotes } = props;
 
   let time = `${format(Date.parse(date), "dd.MM.yyyy")}. at ${format(
     Date.parse(date),
@@ -45,9 +71,9 @@ function Post(props) {
     if (
       Number(format(Date.parse(date), "kk")) < Number(format(Date.now(), "kk"))
     ) {
-      time = `Before ${Number(
+      time = `${Number(
         format(Date.now(), "kk") - Number(format(Date.parse(date), "kk"))
-      )} hours`;
+      )}h`;
     }
     if (
       Number(format(Date.parse(date), "kk")) ===
@@ -57,10 +83,10 @@ function Post(props) {
         Number(format(Date.parse(date), "mm")) >
         Number(format(Date.now(), "mm"))
       ) {
-        time = `Before ${
+        time = `${
           Number(format(Date.now(), "mm")) +
           (60 - Number(format(Date.parse(date), "mm")))
-        } minuts`;
+        } min`;
       } else if (
         Number(format(Date.now(), "mm")) -
           Number(format(Date.parse(date), "mm")) <
@@ -68,10 +94,10 @@ function Post(props) {
       ) {
         time = `Just now`;
       } else {
-        time = `Before ${
+        time = `${
           Number(format(Date.now(), "mm")) -
           Number(format(Date.parse(date), "mm"))
-        } minuts`;
+        } min`;
       }
     }
   }
@@ -80,9 +106,11 @@ function Post(props) {
       <Header>
         <Time>{time}</Time>
       </Header>
-      <Main>
-        <Body>{body}</Body>
-      </Main>
+      <Body>{body}</Body>
+      <Likes>
+        <Like>Approved: {totalUpvotes}</Like>
+        <Like>Condemn: {totalDownvotes}</Like>
+      </Likes>
     </StyledPost>
   );
 }
