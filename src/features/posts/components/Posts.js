@@ -92,12 +92,9 @@ const PostsDiv = styled.div`
   padding-bottom: 5%;
   padding-top: 5%;
   margin-top: 5%;
+  margin-bottom: 5%;
   padding-left: 5%;
   padding-right: 5%;
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding-right: 5%;
-    padding-left: 5%;
-  }
 `;
 
 function Posts(props) {
@@ -141,6 +138,7 @@ function Posts(props) {
       const response = await fetch(
         `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${nextPage}`
       );
+
       const data = await response.json();
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
@@ -167,6 +165,7 @@ function Posts(props) {
       const response = await fetch(
         `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${0}`
       );
+
       const data = await response.json();
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);

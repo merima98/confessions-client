@@ -84,17 +84,15 @@ const Condemn = styled.div`
 `;
 
 const PostsDiv = styled.div`
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.background};
+
   border-radius: 8px;
   padding-bottom: 5%;
   padding-top: 5%;
   margin-top: 5%;
+  margin-bottom: 5%;
   padding-left: 5%;
   padding-right: 5%;
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    padding-right: 5%;
-    padding-left: 5%;
-  }
 `;
 
 function RandomPosts(props) {
