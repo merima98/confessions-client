@@ -92,31 +92,40 @@ function Header() {
         </Links>
         <DatkTheme>
           {isDarkMode ? (
-            <Sun style={{ cursor: "pointer" }} onClick={onChange} />
+            <Sun
+              style={{ cursor: "pointer", color: "#8B8D90" }}
+              onClick={onChange}
+            />
           ) : (
-            <Moon style={{ cursor: "pointer" }} onClick={onChange} />
+            <Moon
+              style={{ cursor: "pointer", color: "#8B8D90" }}
+              onClick={onChange}
+            />
           )}
         </DatkTheme>
         <Links exact to="/sort/lastadded">
           <RefreshCcw
             to="/sort/lastadded"
-            style={{ height: "20px", width: "20px" }}
+            style={{ height: "20px", width: "20px", color: "#8B8D90" }}
           />
         </Links>
         <Links exact to="/sort/upvoted">
           <ArrowUp
             to="/sort/upvoted"
-            style={{ height: "20px", width: "20px" }}
+            style={{ height: "20px", width: "20px", color: "#8B8D90" }}
           />
         </Links>{" "}
         <Links exact to="/sort/downvoted">
           <ArrowDown
             to="/sort/downvoted"
-            style={{ height: "20px", width: "20px" }}
+            style={{ height: "20px", width: "20px", color: "#8B8D90" }}
           />
         </Links>
         <Links exact to="/sort/random">
-          <Filter to="/sort/random" style={{ height: "20px", width: "20px" }} />
+          <Filter
+            to="/sort/random"
+            style={{ height: "20px", width: "20px", color: "#8B8D90" }}
+          />
         </Links>
       </Container>
     </StyledHeader>

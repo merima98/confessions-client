@@ -26,75 +26,59 @@ const PostsContainer = styled.div`
 `;
 
 const Buttons = styled.div`
-  width: 100%;
-  margin: -0.375rem -0.125rem;
-  border-bottom: 0.5px solid ${(props) => props.theme.colors.lineColor};
-  border-top: 0.5px solid ${(props) => props.theme.colors.lineColor};
-  padding: 0.75rem;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  border-bottom: 1px solid #3e4042;
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    width: 100%;
+    flex-direction: row;
   }
 `;
 
 const Approve = styled.div`
   cursor: pointer;
   color: #65676b;
-  margin: -0.375rem -0.25rem;
-  display: inline;
-  text-align: center;
-  flex: 10%;
-  flex-direction: column;
-  padding: 0rem 0.75rem;
-  font-size: 7px;
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 15px;
+  margin-bottom: 2px;
   font-family: Segoe UI Historic;
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
-    border-radius: 2.5%;
+    border-radius: 2%;
   }
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
-    font-size: 15px;
-    font-family: Segoe UI Historic;
   }
 `;
 
 const Condemn = styled.div`
   cursor: pointer;
   color: #65676b;
-  margin: -0.375rem -0.25rem;
-  display: inline;
-  text-align: center;
-  flex: 10%;
-  flex-direction: column;
-  padding: 0rem 0.75rem;
-  font-size: 7px;
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 15px;
   font-family: Segoe UI Historic;
+
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
-    border-radius: 2.5%;
+    border-radius: 2%;
   }
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
-    font-size: 15px;
-    font-family: Segoe UI Historic;
   }
 `;
 
 const PostsDiv = styled.div`
   background-color: ${(props) => props.theme.colors.background};
-
   border-radius: 8px;
-  padding-bottom: 5%;
-  padding-top: 5%;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  padding-left: 5%;
-  padding-right: 5%;
+  margin-bottom: 1rem;
+  padding: 1rem;
 `;
-
 function DownvotedPosts(props) {
   const [posts, setPosts] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(0);

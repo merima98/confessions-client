@@ -12,6 +12,7 @@ const Wrapper = styled.div`
   padding: 1rem 0.5rem;
   background-color: ${(props) => props.theme.colors.background};
   border-radius: 8px;
+  margin-bottom: 1rem;
 `;
 
 const Input = styled.input`
