@@ -18,24 +18,16 @@ function App() {
   const theme = isDarkMode ? darkTheme : lightTheme;
   return (
     <ThemeProvider theme={theme}>
-      <React.Fragment>
-        <BrowserRouter>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={() => <Posts />} />
-            <Route path="/sort/random" component={() => <RandomPosts />} />
-            <Route path="/sort/upvoted" component={() => <UpvotedPosts />} />
-            <Route
-              path="/sort/downvoted"
-              component={() => <DownvotedPosts />}
-            />
-            <Route
-              path="/sort/lastadded"
-              component={() => <LastAddedPosts />}
-            />
-          </Switch>
-        </BrowserRouter>
-      </React.Fragment>
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Posts} />
+          <Route path="/sort/random" component={RandomPosts} />
+          <Route path="/sort/upvoted" component={UpvotedPosts} />
+          <Route path="/sort/downvoted" component={DownvotedPosts} />
+          <Route path="/sort/lastadded" component={LastAddedPosts} />
+        </Switch>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
