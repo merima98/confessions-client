@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
@@ -10,36 +10,28 @@ import LastAddedPosts from "./features/posts/components/LastAddedPosts";
 import Header from "./features/header/components/Header";
 import { darkTheme, lightTheme } from "./themes/themes";
 
+import { useDarkMode } from "./state";
+
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const isDarkMode = useDarkMode((state) => state.isDarkMode);
+
   const theme = isDarkMode ? darkTheme : lightTheme;
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <BrowserRouter>
-          <Header setIsDarkMode={setIsDarkMode} isDarkMode={isDarkMode} />
-
+          <Header />
           <Switch>
-            <Route
-              exact
-              path="/"
-              component={() => <Posts isDarkMode={setIsDarkMode} />}
-            />
-            <Route
-              path="/sort/random"
-              component={() => <RandomPosts isDarkMode={setIsDarkMode} />}
-            />
-            <Route
-              path="/sort/upvoted"
-              component={() => <UpvotedPosts isDarkMode={setIsDarkMode} />}
-            />
+            <Route exact path="/" component={() => <Posts />} />
+            <Route path="/sort/random" component={() => <RandomPosts />} />
+            <Route path="/sort/upvoted" component={() => <UpvotedPosts />} />
             <Route
               path="/sort/downvoted"
-              component={() => <DownvotedPosts isDarkMode={setIsDarkMode} />}
+              component={() => <DownvotedPosts />}
             />
             <Route
               path="/sort/lastadded"
-              component={() => <LastAddedPosts isDarkMode={setIsDarkMode} />}
+              component={() => <LastAddedPosts />}
             />
           </Switch>
         </BrowserRouter>

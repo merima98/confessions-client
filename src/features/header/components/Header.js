@@ -12,9 +12,10 @@ import {
 } from "react-feather";
 
 import { BREAKPOINTS } from "../../../constants";
+import { useDarkMode } from "../../../state";
 
 const StyledHeader = styled.header`
-  border-bottom: 1px solid #808080;
+  /* border-bottom: 1px solid #808080; */
   position: fixed;
   top: 0;
   left: 0;
@@ -35,15 +36,15 @@ const Container = styled.div`
 `;
 
 const Links = styled(NavLink)`
-  padding: 16px;
+  padding: 14px;
   color: black;
   text-decoration: none;
 
+  display: flex;
+  justify-content: center;
+
   &.active {
     color: black;
-    text-decoration: none;
-    width: 20px;
-    padding-bottom: 8px;
     border-bottom: 2px solid #1877f2;
   }
 
@@ -60,11 +61,11 @@ const DatkTheme = styled.div`
   color: black;
   text-decoration: none;
 
+  display: flex;
+  justify-content: center;
+
   &.active {
-    color: black;
-    text-decoration: none;
-    width: 20px;
-    padding-bottom: 8px;
+    color: #1877f2;
     border-bottom: 2px solid #1877f2;
   }
 
@@ -77,6 +78,11 @@ const DatkTheme = styled.div`
 `;
 
 function Header(props) {
+  const setIsDarkMode = useDarkMode((state) => state.setIsDarkMode);
+  const isDarkMode = useDarkMode((state) => state.isDarkMode);
+  function onChange() {
+    setIsDarkMode(!isDarkMode);
+  }
   return (
     <StyledHeader>
       <Container>
@@ -84,18 +90,10 @@ function Header(props) {
           <Home to="/" style={{ color: `#1877F2` }} />
         </Links>
         <DatkTheme>
-          {props.isDarkMode ? (
-            <Moon
-              onClick={() => {
-                props.setIsDarkMode(!props.isDarkMode);
-              }}
-            />
+          {isDarkMode ? (
+            <Sun style={{ cursor: "pointer" }} onClick={onChange} />
           ) : (
-            <Sun
-              onClick={() => {
-                props.setIsDarkMode(!props.isDarkMode);
-              }}
-            />
+            <Moon style={{ cursor: "pointer" }} onClick={onChange} />
           )}
         </DatkTheme>
         <Links exact to="/sort/lastadded">
