@@ -15,23 +15,21 @@ import { BREAKPOINTS } from "../../../constants";
 import { useDarkMode } from "../../../state";
 
 const StyledHeader = styled.header`
-  /* border-bottom: 1px solid #808080; */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: ${(props) => props.theme.colors.background};
-  height: 3.5rem;
 `;
 
 const Container = styled.div`
-  width: 50%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-gap: 0.5rem;
+  grid-gap: 1rem;
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    grid-gap: 1rem;
+    max-width: 500px;
   }
 `;
 
@@ -77,7 +75,7 @@ const DatkTheme = styled.div`
   }
 `;
 
-function Header(props) {
+function Header() {
   const setIsDarkMode = useDarkMode((state) => state.setIsDarkMode);
   const isDarkMode = useDarkMode((state) => state.isDarkMode);
   function onChange() {
@@ -87,7 +85,10 @@ function Header(props) {
     <StyledHeader>
       <Container>
         <Links exact to="/">
-          <Home to="/" style={{ color: `#1877F2` }} />
+          <Home
+            to="/"
+            style={{ height: "20px", width: "20px", color: `#1877F2` }}
+          />
         </Links>
         <DatkTheme>
           {isDarkMode ? (
@@ -97,16 +98,25 @@ function Header(props) {
           )}
         </DatkTheme>
         <Links exact to="/sort/lastadded">
-          <RefreshCcw to="/sort/lastadded" />
+          <RefreshCcw
+            to="/sort/lastadded"
+            style={{ height: "20px", width: "20px" }}
+          />
         </Links>
         <Links exact to="/sort/upvoted">
-          <ArrowUp to="/sort/upvoted" />
+          <ArrowUp
+            to="/sort/upvoted"
+            style={{ height: "20px", width: "20px" }}
+          />
         </Links>{" "}
         <Links exact to="/sort/downvoted">
-          <ArrowDown to="/sort/downvoted" />
+          <ArrowDown
+            to="/sort/downvoted"
+            style={{ height: "20px", width: "20px" }}
+          />
         </Links>
         <Links exact to="/sort/random">
-          <Filter to="/sort/random" />
+          <Filter to="/sort/random" style={{ height: "20px", width: "20px" }} />
         </Links>
       </Container>
     </StyledHeader>

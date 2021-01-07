@@ -2,63 +2,35 @@ import React from "react";
 import { format } from "date-fns";
 import styled from "styled-components";
 
-import { BREAKPOINTS } from "../../../constants";
-
 const StyledPost = styled.div`
   background-color: ${(props) => props.theme.colors.background};
 `;
 
-const Header = styled.header`
-  margin: 0.3rem 0;
-  height: 0.1rem;
-  width: 5rem;
-  background-color: ${(props) => props.theme.colors.background};
-
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    width: 24rem;
-    margin: -0.5rem 0;
-    height: 1.6rem;
-  }
-`;
-const Body = styled.p`
-  width: 100%;
-  margin-bottom: 2rem;
-
-  font: 13px Segoe UI Historic;
-
-  color: ${(props) => props.theme.colors.color};
-
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    font-size: 24px;
-    font-family: Segoe UI Historic;
-  }
-`;
 const Time = styled.span`
   color: #65676b;
-  font-size: 7.5px;
+  font-size: 13px;
   font-family: Segoe UI Historic;
+  margin-bottom: 5px;
   background-color: ${(props) => props.theme.colors.background};
+`;
 
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    font-size: 13px;
-  }
+const Body = styled.p`
+  margin-bottom: 2rem;
+  font-size: 24px;
+  font-family: Segoe UI Historic;
+  color: ${(props) => props.theme.colors.color};
 `;
 
 const Likes = styled.div`
-  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin-bottom: 1rem;
 `;
 const Like = styled.span`
-  width: 50%;
   color: #65676b;
   text-align: center;
-  margin-right: 1rem;
-  font-size: 7px;
+  font-size: 15px;
   font-family: Segoe UI Historic;
-
-  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    font-size: 15px;
-  }
 `;
 
 function Post(props) {
@@ -107,9 +79,7 @@ function Post(props) {
   }
   return (
     <StyledPost>
-      <Header>
-        <Time>{time}</Time>
-      </Header>
+      <Time>{time}</Time>
       <Body>{body}</Body>
       <Likes>
         <Like>Approved: {totalUpvotes}</Like>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useDarkMode } from "../../../state";
 
 const { REACT_APP_HOST } = process.env;
 const { REACT_APP_PORT } = process.env;
@@ -43,6 +44,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function NewPostForm() {
+  const isDarkMode = useDarkMode((state) => state.isDarkMode);
   const formik = useFormik({
     initialValues: {
       body: "",
@@ -76,18 +78,33 @@ function NewPostForm() {
           value={formik.values.body}
           placeholder="What is on your mind?"
         />
-        <SubmitButton
-          type="submit"
-          disabled={!(formik.isValid && formik.dirty)}
-          style={{
-            backgroundColor: !(formik.isValid && formik.dirty)
-              ? "#E4E6EB"
-              : null,
-            color: !(formik.isValid && formik.dirty) ? "#C0C4C8" : null,
-          }}
-        >
-          Post
-        </SubmitButton>
+        {isDarkMode ? (
+          <SubmitButton
+            type="submit"
+            disabled={!(formik.isValid && formik.dirty)}
+            style={{
+              backgroundColor: !(formik.isValid && formik.dirty)
+                ? "#505151"
+                : null,
+              color: !(formik.isValid && formik.dirty) ? "#C0C4C8" : null,
+            }}
+          >
+            Post
+          </SubmitButton>
+        ) : (
+          <SubmitButton
+            type="submit"
+            disabled={!(formik.isValid && formik.dirty)}
+            style={{
+              backgroundColor: !(formik.isValid && formik.dirty)
+                ? "#E4E6EB"
+                : null,
+              color: !(formik.isValid && formik.dirty) ? "#C0C4C8" : null,
+            }}
+          >
+            Post
+          </SubmitButton>
+        )}
       </form>
     </Wrapper>
   );
