@@ -8,6 +8,7 @@ import UpvotedPosts from "./features/posts/components/UpvotedPosts";
 import DownvotedPosts from "./features/posts/components/DownvotedPosts";
 import LastAddedPosts from "./features/posts/components/LastAddedPosts";
 import Header from "./features/header/components/Header";
+import Bookmarks from "./features/posts/components/Bookmarks";
 import { darkTheme, lightTheme } from "./themes/themes";
 import GlobalStyle from "./globalStyles";
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/sort/upvoted" component={UpvotedPosts} />
           <Route path="/sort/downvoted" component={DownvotedPosts} />
           <Route path="/sort/lastadded" component={LastAddedPosts} />
+          <Route path="/bookmarks" component={Bookmarks} />
         </Switch>
       </BrowserRouter>
     </ThemeProvider>

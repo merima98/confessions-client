@@ -5,6 +5,8 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    background-color: ${(props) => props.theme.colors.background};
+
     }
 
     *,

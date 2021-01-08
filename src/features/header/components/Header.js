@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   Home,
   Sun,
@@ -9,6 +10,7 @@ import {
   ArrowDown,
   Filter,
   RefreshCcw,
+  Menu,
 } from "react-feather";
 
 import { BREAKPOINTS } from "../../../constants";
@@ -24,15 +26,35 @@ const StyledHeader = styled.header`
 
 const Container = styled.div`
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-gap: 1rem;
+  padding: 0 1rem;
+  max-width: ${BREAKPOINTS.LARGE_DEVICES};
+`;
+
+const StyledNavLink = styled.div`
+  display: none;
 
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     max-width: 500px;
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 1rem;
   }
 `;
+const StyledMenu = styled.div`
+  /* display: grid;
+  grid-template-columns: 0.5fr 1fr; */
+  display: flex;
+  flex-direction: row;
+  /* margin: 0 auto; */
+  /* grid-template-columns: 1fr; */
+  cursor: pointer;
+  padding: 18px;
 
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    display: none;
+  }
+`;
 const Links = styled(NavLink)`
   padding: 14px;
   color: black;
@@ -76,21 +98,34 @@ const DatkTheme = styled.div`
 `;
 
 function Header() {
+  let history = useHistory();
+  const location = useLocation();
   const setIsDarkMode = useDarkMode((state) => state.setIsDarkMode);
   const isDarkMode = useDarkMode((state) => state.isDarkMode);
   function onChange() {
     setIsDarkMode(!isDarkMode);
   }
+
+  function handleBookmarks() {
+    if (location.pathname === "/bookmarks") {
+      return history.goBack();
+    }
+    return history.push("/bookmarks");
+  }
+
   return (
     <StyledHeader>
       <Container>
-        <Links exact to="/">
-          <Home
-            to="/"
-            style={{ height: "20px", width: "20px", color: `#1877F2` }}
+        <StyledMenu>
+          <Menu
+            onClick={handleBookmarks}
+            style={{
+              height: "20px",
+              width: "20px",
+              color: `#8B8D90`,
+              marginRight: "1rem",
+            }}
           />
-        </Links>
-        <DatkTheme>
           {isDarkMode ? (
             <Sun
               style={{ cursor: "pointer", color: "#8B8D90" }}
@@ -102,31 +137,52 @@ function Header() {
               onClick={onChange}
             />
           )}
-        </DatkTheme>
-        <Links exact to="/sort/lastadded">
-          <RefreshCcw
-            to="/sort/lastadded"
-            style={{ height: "20px", width: "20px", color: "#8B8D90" }}
-          />
-        </Links>
-        <Links exact to="/sort/upvoted">
-          <ArrowUp
-            to="/sort/upvoted"
-            style={{ height: "20px", width: "20px", color: "#8B8D90" }}
-          />
-        </Links>{" "}
-        <Links exact to="/sort/downvoted">
-          <ArrowDown
-            to="/sort/downvoted"
-            style={{ height: "20px", width: "20px", color: "#8B8D90" }}
-          />
-        </Links>
-        <Links exact to="/sort/random">
-          <Filter
-            to="/sort/random"
-            style={{ height: "20px", width: "20px", color: "#8B8D90" }}
-          />
-        </Links>
+        </StyledMenu>
+        <StyledNavLink>
+          <Links exact to="/">
+            <Home
+              to="/"
+              style={{ height: "20px", width: "20px", color: `#1877F2` }}
+            />
+          </Links>
+          <DatkTheme>
+            {isDarkMode ? (
+              <Sun
+                style={{ cursor: "pointer", color: "#8B8D90" }}
+                onClick={onChange}
+              />
+            ) : (
+              <Moon
+                style={{ cursor: "pointer", color: "#8B8D90" }}
+                onClick={onChange}
+              />
+            )}
+          </DatkTheme>
+          <Links exact to="/sort/lastadded">
+            <RefreshCcw
+              to="/sort/lastadded"
+              style={{ height: "20px", width: "20px", color: "#8B8D90" }}
+            />
+          </Links>
+          <Links exact to="/sort/upvoted">
+            <ArrowUp
+              to="/sort/upvoted"
+              style={{ height: "20px", width: "20px", color: "#8B8D90" }}
+            />
+          </Links>{" "}
+          <Links exact to="/sort/downvoted">
+            <ArrowDown
+              to="/sort/downvoted"
+              style={{ height: "20px", width: "20px", color: "#8B8D90" }}
+            />
+          </Links>
+          <Links exact to="/sort/random">
+            <Filter
+              to="/sort/random"
+              style={{ height: "20px", width: "20px", color: "#8B8D90" }}
+            />
+          </Links>
+        </StyledNavLink>
       </Container>
     </StyledHeader>
   );
