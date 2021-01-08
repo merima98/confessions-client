@@ -9,6 +9,7 @@ import DownvotedPosts from "./features/posts/components/DownvotedPosts";
 import LastAddedPosts from "./features/posts/components/LastAddedPosts";
 import Header from "./features/header/components/Header";
 import { darkTheme, lightTheme } from "./themes/themes";
+import GlobalStyle from "./globalStyles";
 
 import { useDarkMode } from "./state";
 
@@ -18,6 +19,7 @@ function App() {
   const theme = isDarkMode ? darkTheme : lightTheme;
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <BrowserRouter>
         <Header />
         <Switch>
