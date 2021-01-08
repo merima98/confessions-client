@@ -7,24 +7,21 @@ const PaginatorControls = styled.div`
 `;
 
 const PaginatorControl = styled.button`
-  width: 5rem;
-  padding: 0.2rem 0;
+  width: 50%;
   margin: 0 1rem;
-  border: 1px solid #999999;
-  background: transparent;
-  font: inherit;
+  border: 1px solid ${(props) => props.theme.colors.borderColor};
   cursor: pointer;
-  font-size: 0.5rem;
-  color: #999999;
-
-  &.active {
-    color: #4d4d4d;
-    border-color: #4d4d4d;
-  }
+  font-size: 15px;
+  color: ${(props) => props.theme.colors.borderColor};
+  outline: none;
+  background-color: ${(props) => props.theme.colors.body};
 
   &:hover {
-    color: #4d4d4d;
-    border-color: #4d4d4d;
+    border-top: 1px solid ${(props) => props.theme.colors.borderColor};
+    border-bottom: 1px solid ${(props) => props.theme.colors.borderColor};
+    border-left: none;
+    border-right: none;
+    background-color: ${(props) => props.theme.colors.background};
   }
 `;
 

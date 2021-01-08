@@ -9,6 +9,7 @@ export const darkTheme = {
     buttonHover: " #4d4d4d",
     newPostBorderColor: "#3a3b3c",
     lineColor: "#808080",
+    borderColor: "#3e4042",
   },
 };
 
@@ -23,5 +24,6 @@ export const lightTheme = {
     buttonHover: " #f0f2f5",
     newPostBorderColor: "#F2F3F5",
     lineColor: "#d9dadc",
+    borderColor: "#CED0D4",
   },
 };
