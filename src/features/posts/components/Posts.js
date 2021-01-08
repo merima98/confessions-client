@@ -44,12 +44,13 @@ const Approve = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   font-size: 15px;
-  margin-bottom: 2px;
   font-family: Segoe UI Historic;
+
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
     border-radius: 2%;
   }
+
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
   }
@@ -156,7 +157,7 @@ function Posts(props) {
     } catch (err) {
       console.log(err);
     }
-  }, [setPosts, setCurrentPage]);
+  }, [setPosts, setCurrentPage, setTotalPage]);
 
   return (
     <Wrapper>

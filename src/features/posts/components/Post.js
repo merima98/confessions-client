@@ -17,6 +17,7 @@ const Time = styled.span`
 `;
 
 const Body = styled.p`
+  overflow-wrap: anywhere;
   color: ${(props) => props.theme.colors.color};
   font-size: 20px;
   font-family: Segoe UI Historic;
