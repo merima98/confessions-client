@@ -42,12 +42,8 @@ const StyledNavLink = styled.div`
   }
 `;
 const StyledMenu = styled.div`
-  /* display: grid;
-  grid-template-columns: 0.5fr 1fr; */
   display: flex;
   flex-direction: row;
-  /* margin: 0 auto; */
-  /* grid-template-columns: 1fr; */
   cursor: pointer;
   padding: 18px;
 
@@ -69,7 +65,6 @@ const Links = styled(NavLink)`
   }
 
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
-    left: 0;
     &.active {
       padding-bottom: 0px;
     }

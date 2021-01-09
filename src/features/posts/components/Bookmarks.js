@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { BREAKPOINTS, HEADER_NAVIGATION } from "../../../constants";
 
@@ -13,7 +13,7 @@ const Container = styled.div`
   max-width: ${BREAKPOINTS.LARGE_DEVICES};
 `;
 
-const StyledNavLink = styled(Link)`
+const StyledNavLink = styled(NavLink)`
   padding: 0.5rem;
   border-radius: 4px;
   color: ${(props) => props.theme.colors.bookmarksTextColor};

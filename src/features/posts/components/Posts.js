@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 import Post from "./Post";
 import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
 import NewPostForm from "./NewPostForm";
 
-const { REACT_APP_HOST } = process.env;
-const { REACT_APP_PORT } = process.env;
+import api from "../../../api/queries";
+import mutations from "../../../api/mutations";
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -81,32 +81,41 @@ const PostsDiv = styled.div`
   padding: 1rem;
 `;
 
-function Posts(props) {
+function Posts() {
+  const location = useLocation();
   const [posts, setPosts] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalPage, setTotalPage] = React.useState(0);
 
   const pages = totalPage;
 
+  let sort;
+
+  if (location.pathname === "/sort/random") {
+    sort = "1";
+  }
+  if (location.pathname === "/sort/upvoted") {
+    sort = "2";
+  }
+  if (location.pathname === "/sort/downvoted") {
+    sort = "3";
+  }
+  if (location.pathname === "/sort/lastadded" || location.pathname === "/") {
+    sort = "0";
+  }
+
   function handleAprove(id) {
-    axios
-      .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${1}`)
-      .then(async () => {
-        const response = await fetch(
-          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${0}`
-        );
-        const data = await response.json();
-        setPosts(data.posts);
-      });
+    mutations.rate(id, 1).then(async () => {
+      const response = await api.confessions(0, sort);
+      const data = await response.data;
+      setPosts(data.posts);
+    });
   }
   async function loadPosts(currentPage) {
     let nextPage = Number(currentPage) + Number(1);
-
     try {
-      const response = await fetch(
-        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${nextPage}`
-      );
-      const data = await response.json();
+      const response = await api.confessions(nextPage, sort);
+      const data = await response.data;
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
@@ -119,11 +128,8 @@ function Posts(props) {
     let nextPage = Number(currentPage) - Number(1);
 
     try {
-      const response = await fetch(
-        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${nextPage}`
-      );
-
-      const data = await response.json();
+      const response = await api.confessions(nextPage, sort);
+      const data = await response.data;
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
@@ -133,24 +139,17 @@ function Posts(props) {
   }
 
   function handleCondemn(id) {
-    axios
-      .put(`http://${REACT_APP_HOST}:${REACT_APP_PORT}/${id}/${0}`)
-      .then(async () => {
-        const response = await fetch(
-          `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${0}`
-        );
-        const data = await response.json();
-        setPosts(data.posts);
-      });
+    mutations.rate(id, 0).then(async () => {
+      const response = await api.confessions(0, sort);
+      const data = await response.data;
+      setPosts(data.posts);
+    });
   }
 
   useEffect(async () => {
     try {
-      const response = await fetch(
-        `http://${REACT_APP_HOST}:${REACT_APP_PORT}/${0}`
-      );
-
-      const data = await response.json();
+      const response = await api.confessions(0, sort);
+      const data = await response.data;
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
@@ -163,7 +162,7 @@ function Posts(props) {
     <Wrapper>
       <Container>
         <PostsContainer>
-          <NewPostForm />
+          {location.pathname === "/" && <NewPostForm />}
           {posts.map((post) => {
             return (
               <PostsDiv key={post._id}>
