@@ -6,7 +6,6 @@ import Post from "./Post";
 import Paginator from "../../header/components/Paginator";
 import { BREAKPOINTS } from "../../../constants";
 import NewPostForm from "./NewPostForm";
-
 import api from "../../../api/queries";
 import mutations from "../../../api/mutations";
 
@@ -89,24 +88,24 @@ function Posts() {
 
   const pages = totalPage;
 
-  let sort;
-
-  if (location.pathname === "/sort/random") {
-    sort = "1";
-  }
-  if (location.pathname === "/sort/upvoted") {
-    sort = "2";
-  }
-  if (location.pathname === "/sort/downvoted") {
-    sort = "3";
-  }
-  if (location.pathname === "/sort/lastadded" || location.pathname === "/") {
-    sort = "0";
+  function getSort() {
+    if (location.pathname === "/sort/random") {
+      return 1;
+    }
+    if (location.pathname === "/sort/upvoted") {
+      return 2;
+    }
+    if (location.pathname === "/sort/downvoted") {
+      return 3;
+    }
+    if (location.pathname === "/sort/lastadded" || location.pathname === "/") {
+      return 0;
+    }
   }
 
   function handleAprove(id) {
     mutations.rate(id, 1).then(async () => {
-      const response = await api.confessions(0, sort);
+      const response = await api.confessions(0, getSort());
       const data = await response.data;
       setPosts(data.posts);
     });
@@ -114,7 +113,7 @@ function Posts() {
   async function loadPosts(currentPage) {
     let nextPage = Number(currentPage) + Number(1);
     try {
-      const response = await api.confessions(nextPage, sort);
+      const response = await api.confessions(nextPage, getSort());
       const data = await response.data;
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
@@ -125,10 +124,9 @@ function Posts() {
   }
 
   async function loadPreviousPosts(currentPage) {
-    let nextPage = Number(currentPage) - Number(1);
-
+    const nextPage = Number(currentPage) - Number(1);
     try {
-      const response = await api.confessions(nextPage, sort);
+      const response = await api.confessions(nextPage, getSort());
       const data = await response.data;
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
@@ -138,17 +136,16 @@ function Posts() {
     }
   }
 
-  function handleCondemn(id) {
-    mutations.rate(id, 0).then(async () => {
-      const response = await api.confessions(0, sort);
-      const data = await response.data;
-      setPosts(data.posts);
-    });
+  async function handleCondemn(id) {
+    await mutations.rate(id, 0);
+    const response = await api.confessions(0, getSort());
+    const data = await response.data;
+    setPosts(data.posts);
   }
 
   useEffect(async () => {
     try {
-      const response = await api.confessions(0, sort);
+      const response = await api.confessions(0, getSort());
       const data = await response.data;
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
@@ -156,7 +153,7 @@ function Posts() {
     } catch (err) {
       console.log(err);
     }
-  }, [setPosts, setCurrentPage, setTotalPage]);
+  }, [setPosts, setCurrentPage, setTotalPage, location.pathname]);
 
   return (
     <Wrapper>
