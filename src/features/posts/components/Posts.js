@@ -103,7 +103,7 @@ function Posts() {
     }
   }
 
-  async function handleAprove(id) {
+  async function handleApprove(id) {
     await mutations.rate(id, 1);
     const editedPosts = posts.map((post) => {
       if (id === post._id) {
@@ -162,14 +162,21 @@ function Posts() {
     }
   }, [setPosts, setCurrentPage, setTotalPage, location.pathname]);
 
+  async function onSubmit(values, body) {
+    await mutations.create(values);
+    const response = await api.confessions(0, getSort());
+    const data = await response.data;
+    setPosts(data.posts);
+  }
+
   return (
     <Wrapper>
       <Container>
         <PostsContainer>
-          {location.pathname === "/" && <NewPostForm />}
-          {posts.map((post) => {
+          {location.pathname === "/" && <NewPostForm onSubmit={onSubmit} />}
+          {posts.map((post, index) => {
             return (
-              <PostsDiv key={post._id}>
+              <PostsDiv key={index}>
                 <Post
                   key={post._id}
                   body={post.body}
@@ -179,7 +186,7 @@ function Posts() {
                   totalUpvotes={post.totalUpvotes}
                 />
                 <Buttons>
-                  <Approve onClick={() => handleAprove(post._id)}>
+                  <Approve onClick={() => handleApprove(post._id)}>
                     Approve
                   </Approve>{" "}
                   <Condemn onClick={() => handleCondemn(post._id)}>

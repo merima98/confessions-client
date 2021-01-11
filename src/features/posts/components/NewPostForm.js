@@ -4,8 +4,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDarkMode } from "../../../state";
 
-import mutations from "../../../api/mutations";
-
 const Wrapper = styled.div`
   padding: 1rem 0.5rem;
   background-color: ${(props) => props.theme.colors.background};
@@ -49,14 +47,9 @@ function NewPostForm(props) {
     initialValues: {
       body: "",
     },
-    onSubmit: onSubmit,
+    onSubmit: (vals) => props.onSubmit(vals),
     validationSchema,
   });
-
-  async function onSubmit(values) {
-    await mutations.create(values);
-    window.location.reload();
-  }
 
   return (
     <Wrapper>
