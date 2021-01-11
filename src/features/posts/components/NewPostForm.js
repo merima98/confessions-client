@@ -2,11 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import { useDarkMode } from "../../../state";
 
-const { REACT_APP_HOST } = process.env;
-const { REACT_APP_PORT } = process.env;
+import mutations from "../../../api/mutations";
 
 const Wrapper = styled.div`
   padding: 1rem 0.5rem;
@@ -44,28 +42,20 @@ const validationSchema = Yup.object().shape({
     .required("Required"),
 });
 
-function NewPostForm() {
+function NewPostForm(props) {
   const isDarkMode = useDarkMode((state) => state.isDarkMode);
+
   const formik = useFormik({
     initialValues: {
       body: "",
     },
-    onSubmit,
+    onSubmit: onSubmit,
     validationSchema,
   });
 
-  function onSubmit(values) {
-    console.log("Posted", values);
-    axios({
-      method: "POST",
-      url: `http://${REACT_APP_HOST}:${REACT_APP_PORT}/`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: values,
-    }).then((res) => {
-      setTimeout(() => window.location.reload(), 1000);
-    });
+  async function onSubmit(values) {
+    await mutations.create(values);
+    window.location.reload();
   }
 
   return (

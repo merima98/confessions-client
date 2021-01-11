@@ -103,15 +103,18 @@ function Posts() {
     }
   }
 
-  function handleAprove(id) {
-    mutations.rate(id, 1).then(async () => {
-      const response = await api.confessions(0, getSort());
-      const data = await response.data;
-      setPosts(data.posts);
+  async function handleAprove(id) {
+    await mutations.rate(id, 1);
+    const editedPosts = posts.map((post) => {
+      if (id === post._id) {
+        return { ...post, totalUpvotes: post.totalUpvotes + 1 };
+      }
+      return post;
     });
+    setPosts(editedPosts);
   }
   async function loadPosts(currentPage) {
-    let nextPage = Number(currentPage) + Number(1);
+    const nextPage = Number(currentPage) + Number(1);
     try {
       const response = await api.confessions(nextPage, getSort());
       const data = await response.data;
@@ -138,9 +141,13 @@ function Posts() {
 
   async function handleCondemn(id) {
     await mutations.rate(id, 0);
-    const response = await api.confessions(0, getSort());
-    const data = await response.data;
-    setPosts(data.posts);
+    const editedPosts = posts.map((post) => {
+      if (id === post._id) {
+        return { ...post, totalDownvotes: post.totalDownvotes + 1 };
+      }
+      return post;
+    });
+    setPosts(editedPosts);
   }
 
   useEffect(async () => {
