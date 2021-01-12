@@ -31,7 +31,6 @@ const Buttons = styled.div`
   justify-content: center;
   text-align: center;
   border-bottom: 1px solid #3e4042;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     flex-direction: row;
   }
@@ -44,12 +43,10 @@ const Approve = styled.div`
   grid-template-columns: 1fr;
   font-size: 15px;
   font-family: Segoe UI Historic;
-
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
     border-radius: 2%;
   }
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
   }
@@ -62,12 +59,10 @@ const Condemn = styled.div`
   grid-template-columns: 1fr;
   font-size: 15px;
   font-family: Segoe UI Historic;
-
   &:hover {
     background-color: ${(props) => props.theme.colors.buttonHover};
     border-radius: 2%;
   }
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     width: 50%;
   }

@@ -32,7 +32,6 @@ const Container = styled.div`
 
 const StyledNavLink = styled.div`
   display: none;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     max-width: 500px;
     display: grid;
@@ -46,7 +45,6 @@ const StyledMenu = styled.div`
   flex-direction: row;
   cursor: pointer;
   padding: 18px;
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     display: none;
   }
@@ -55,15 +53,12 @@ const Links = styled(NavLink)`
   padding: 14px;
   color: black;
   text-decoration: none;
-
   display: flex;
   justify-content: center;
-
   &.active {
     color: black;
     border-bottom: 2px solid #1877f2;
   }
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     &.active {
       padding-bottom: 0px;
@@ -75,15 +70,12 @@ const DatkTheme = styled.div`
   padding: 16px;
   color: black;
   text-decoration: none;
-
   display: flex;
   justify-content: center;
-
   &.active {
     color: #1877f2;
     border-bottom: 2px solid #1877f2;
   }
-
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     left: 0;
     &.active {

@@ -4,8 +4,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDarkMode } from "../../../state";
 
-import mutations from "../../../api/mutations";
-
 const Wrapper = styled.div`
   padding: 1rem 0.5rem;
   background-color: ${(props) => props.theme.colors.background};
@@ -44,7 +42,6 @@ const validationSchema = Yup.object().shape({
 
 function NewPostForm(props) {
   const isDarkMode = useDarkMode((state) => state.isDarkMode);
-
   const formik = useFormik({
     initialValues: {
       body: "",
@@ -69,6 +66,7 @@ function NewPostForm(props) {
             type="submit"
             disabled={!(formik.isValid && formik.dirty)}
             style={{
+              cursor: !(formik.isValid && formik.dirty) ? "not-allowed" : null,
               backgroundColor: !(formik.isValid && formik.dirty)
                 ? "#505151"
                 : null,
@@ -82,6 +80,7 @@ function NewPostForm(props) {
             type="submit"
             disabled={!(formik.isValid && formik.dirty)}
             style={{
+              cursor: !(formik.isValid && formik.dirty) ? "not-allowed" : null,
               backgroundColor: !(formik.isValid && formik.dirty)
                 ? "#E4E6EB"
                 : null,
