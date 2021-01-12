@@ -87,7 +87,7 @@ const DatkTheme = styled.div`
 function Header(props) {
   const { onFirst } = props;
 
-  let history = useHistory();
+  const history = useHistory();
   const location = useLocation();
   const setIsDarkMode = useDarkMode((state) => state.setIsDarkMode);
   const isDarkMode = useDarkMode((state) => state.isDarkMode);
