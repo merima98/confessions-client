@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import Posts from "./features/posts/components/Posts";
-import Header from "./features/header/components/Header";
 import Bookmarks from "./features/posts/components/Bookmarks";
 import { darkTheme, lightTheme } from "./themes/themes";
 import GlobalStyle from "./globalStyles";
@@ -18,7 +17,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <BrowserRouter>
-        <Header />
         <Switch>
           <Route exact path="/" component={Posts} />
           <Route path="/sort/random" component={Posts} />

@@ -46,9 +46,15 @@ function NewPostForm(props) {
     initialValues: {
       body: "",
     },
-    onSubmit: (vals) => props.onSubmit(vals),
+    onSubmit: onSubmit,
     validationSchema,
   });
+
+  async function onSubmit(values) {
+    const newPost = await props.mutations.create(values);
+    props.setPosts([...props.posts, newPost.data]);
+    formik.values.body = "";
+  }
 
   return (
     <Wrapper>

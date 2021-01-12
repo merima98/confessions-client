@@ -84,7 +84,9 @@ const DatkTheme = styled.div`
   }
 `;
 
-function Header() {
+function Header(props) {
+  const { onFirst } = props;
+
   let history = useHistory();
   const location = useLocation();
   const setIsDarkMode = useDarkMode((state) => state.setIsDarkMode);
@@ -128,6 +130,7 @@ function Header() {
         <StyledNavLink>
           <Links exact to="/">
             <Home
+              onClick={onFirst}
               to="/"
               style={{ height: "20px", width: "20px", color: `#1877F2` }}
             />
@@ -147,18 +150,21 @@ function Header() {
           </DatkTheme>
           <Links exact to="/sort/lastadded">
             <RefreshCcw
+              onClick={onFirst}
               to="/sort/lastadded"
               style={{ height: "20px", width: "20px", color: "#8B8D90" }}
             />
           </Links>
           <Links exact to="/sort/upvoted">
             <ArrowUp
+              onClick={onFirst}
               to="/sort/upvoted"
               style={{ height: "20px", width: "20px", color: "#8B8D90" }}
             />
           </Links>{" "}
           <Links exact to="/sort/downvoted">
             <ArrowDown
+              onClick={onFirst}
               to="/sort/downvoted"
               style={{ height: "20px", width: "20px", color: "#8B8D90" }}
             />

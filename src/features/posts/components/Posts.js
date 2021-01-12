@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import Post from "./Post";
 import Paginator from "../../header/components/Paginator";
+import Header from "../../header/components/Header";
 import { BREAKPOINTS } from "../../../constants";
 import NewPostForm from "./NewPostForm";
 import api from "../../../api/queries";
@@ -77,7 +78,6 @@ const PostsDiv = styled.div`
 
 function Posts() {
   const location = useLocation();
-  const history = useHistory();
   const [posts, setPosts] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalPage, setTotalPage] = React.useState(0);
@@ -117,9 +117,7 @@ function Posts() {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 
   async function loadPreviousPosts(currentPage) {
@@ -130,9 +128,17 @@ function Posts() {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
+  }
+
+  async function loadFirstPosts() {
+    try {
+      const response = await api.confessions(0, getSort());
+      const data = await response.data;
+      setPosts(data.posts);
+      setCurrentPage(data.pagination.current_page);
+      setTotalPage(data.pagination.total_page);
+    } catch (err) {}
   }
 
   async function handleCondemn(id) {
@@ -153,22 +159,22 @@ function Posts() {
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }, [setPosts, setCurrentPage, setTotalPage, location.pathname]);
-
-  async function onSubmit(values) {
-    const newPost = await mutations.create(values);
-    setPosts([...posts, newPost.data]);
-  }
 
   return (
     <Wrapper>
+      <Header onFirst={() => loadFirstPosts(currentPage)} />
       <Container>
         <PostsContainer>
-          {location.pathname === "/" && <NewPostForm onSubmit={onSubmit} />}
-          {posts.map((post, index) => {
+          {location.pathname === "/" && (
+            <NewPostForm
+              mutations={mutations}
+              posts={posts}
+              setPosts={setPosts}
+            />
+          )}
+          {posts.map((post) => {
             return (
               <PostsDiv key={post._id}>
                 <Post

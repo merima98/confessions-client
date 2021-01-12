@@ -1,9 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
+import { BREAKPOINTS } from "../../../constants";
+
 const PaginatorControls = styled.div`
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    flex-direction: row;
+    justify-content: center;
+  }
 `;
 
 const PaginatorControl = styled.button`
@@ -15,7 +22,6 @@ const PaginatorControl = styled.button`
   color: ${(props) => props.theme.colors.borderColor};
   outline: none;
   background-color: ${(props) => props.theme.colors.body};
-
   &:hover {
     border-top: 1px solid ${(props) => props.theme.colors.borderColor};
     border-bottom: 1px solid ${(props) => props.theme.colors.borderColor};
@@ -33,7 +39,7 @@ function Paginator(props) {
         {currentPage > 0 && (
           <PaginatorControl onClick={onPrevious}>Previous</PaginatorControl>
         )}
-        {currentPage < lastPage - 1 && (
+        {currentPage < lastPage && (
           <PaginatorControl onClick={onNext}>Next</PaginatorControl>
         )}
       </PaginatorControls>
