@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 import Post from "./Post";
 import Paginator from "../../header/components/Paginator";
@@ -82,6 +82,7 @@ const PostsDiv = styled.div`
 
 function Posts() {
   const location = useLocation();
+  const history = useHistory();
   const [posts, setPosts] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalPage, setTotalPage] = React.useState(0);
@@ -162,11 +163,9 @@ function Posts() {
     }
   }, [setPosts, setCurrentPage, setTotalPage, location.pathname]);
 
-  async function onSubmit(values, body) {
-    await mutations.create(values);
-    const response = await api.confessions(0, getSort());
-    const data = await response.data;
-    setPosts(data.posts);
+  async function onSubmit(values) {
+    const newPost = await mutations.create(values);
+    setPosts([...posts, newPost.data]);
   }
 
   return (
@@ -176,7 +175,7 @@ function Posts() {
           {location.pathname === "/" && <NewPostForm onSubmit={onSubmit} />}
           {posts.map((post, index) => {
             return (
-              <PostsDiv key={index}>
+              <PostsDiv key={post._id}>
                 <Post
                   key={post._id}
                   body={post.body}
