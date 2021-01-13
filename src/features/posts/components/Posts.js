@@ -32,7 +32,7 @@ const Buttons = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  border-bottom: 1px solid #3e4042;
+  border-bottom: 1px solid ${(props) => props.theme.colors.borderColor};
   @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
     flex-direction: row;
   }

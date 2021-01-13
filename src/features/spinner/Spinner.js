@@ -3,6 +3,10 @@ import styled, { keyframes } from "styled-components";
 
 import { BREAKPOINTS } from "../../constants";
 
+const Wrapper = styled.div`
+  padding: 64px 20px;
+`;
+
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -27,9 +31,6 @@ const StyledSpinner = styled.div`
   margin: 0 auto;
 `;
 
-const Wrapper = styled.div`
-  padding: 64px 20px;
-`;
 function Spinner() {
   return (
     <Wrapper>

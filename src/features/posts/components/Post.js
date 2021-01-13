@@ -32,7 +32,7 @@ const Likes = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   padding-bottom: 6px;
-  border-bottom: 1px solid #3e4042;
+  border-bottom: 1px solid ${(props) => props.theme.colors.borderColor};
   padding: 10px 0px;
 `;
 const Like = styled.span`
