@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import Post from "./Post";
 import Paginator from "../../header/components/Paginator";
 import Header from "../../header/components/Header";
+import Spinner from "../../spinner/Spinner";
 import { BREAKPOINTS } from "../../../constants";
 import NewPostForm from "./NewPostForm";
 import api from "../../../api/queries";
@@ -81,6 +82,7 @@ function Posts() {
   const [posts, setPosts] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalPage, setTotalPage] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const pages = totalPage;
 
@@ -154,57 +156,68 @@ function Posts() {
 
   useEffect(async () => {
     try {
+      setIsLoading(true);
       const response = await api.confessions(0, getSort());
       const data = await response.data;
       setPosts(data.posts);
       setCurrentPage(data.pagination.current_page);
       setTotalPage(data.pagination.total_page);
+
+      if (data) {
+        setIsLoading(false);
+      } else {
+        setIsLoading(true);
+      }
     } catch (err) {}
   }, [setPosts, setCurrentPage, setTotalPage, location.pathname]);
 
   return (
     <Wrapper>
       <Header onFirst={() => loadFirstPosts(currentPage)} />
-      <Container>
-        <PostsContainer>
-          {location.pathname === "/" && (
-            <NewPostForm
-              mutations={mutations}
-              posts={posts}
-              setPosts={setPosts}
-            />
-          )}
-          {posts.map((post) => {
-            return (
-              <PostsDiv key={post._id}>
-                <Post
-                  key={post._id}
-                  body={post.body}
-                  date={post.date}
-                  id={post._id}
-                  totalDownvotes={post.totalDownvotes}
-                  totalUpvotes={post.totalUpvotes}
-                />
-                <Buttons>
-                  <Approve onClick={() => handleApprove(post._id)}>
-                    Approve
-                  </Approve>{" "}
-                  <Condemn onClick={() => handleCondemn(post._id)}>
-                    Condemn
-                  </Condemn>
-                </Buttons>
-              </PostsDiv>
-            );
-          })}
-        </PostsContainer>
-        <Paginator
-          currentPage={currentPage}
-          lastPage={totalPage}
-          pages={pages}
-          onNext={() => loadPosts(currentPage)}
-          onPrevious={() => loadPreviousPosts(currentPage)}
-        />
-      </Container>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <Container>
+          <PostsContainer>
+            {location.pathname === "/" && (
+              <NewPostForm
+                mutations={mutations}
+                posts={posts}
+                setPosts={setPosts}
+              />
+            )}
+            {posts.map((post) => {
+              return (
+                <PostsDiv key={post._id}>
+                  <Post
+                    key={post._id}
+                    body={post.body}
+                    date={post.date}
+                    id={post._id}
+                    totalDownvotes={post.totalDownvotes}
+                    totalUpvotes={post.totalUpvotes}
+                  />
+                  <Buttons>
+                    <Approve onClick={() => handleApprove(post._id)}>
+                      Approve
+                    </Approve>{" "}
+                    <Condemn onClick={() => handleCondemn(post._id)}>
+                      Condemn
+                    </Condemn>
+                  </Buttons>
+                </PostsDiv>
+              );
+            })}
+          </PostsContainer>
+          <Paginator
+            currentPage={currentPage}
+            lastPage={totalPage}
+            pages={pages}
+            onNext={() => loadPosts(currentPage)}
+            onPrevious={() => loadPreviousPosts(currentPage)}
+          />
+        </Container>
+      )}
     </Wrapper>
   );
 }
