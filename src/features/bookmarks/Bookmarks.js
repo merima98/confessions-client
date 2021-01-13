@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-import { BREAKPOINTS, HEADER_NAVIGATION } from "../../../constants";
+import { BREAKPOINTS, HEADER_NAVIGATION } from "../../constants";
 
 import { Home, ArrowUp, ArrowDown, Filter, RefreshCcw } from "react-feather";
 

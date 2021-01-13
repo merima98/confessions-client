@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDarkMode } from "../../../state";
+import { useDarkMode } from "../../state";
 
 const Wrapper = styled.div`
   padding: 1rem 0.5rem;

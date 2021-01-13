@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { BREAKPOINTS } from "../../../constants";
+import { BREAKPOINTS } from "../../constants";
 
 const PaginatorControls = styled.div`
   display: flex;

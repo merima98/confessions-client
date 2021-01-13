@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
 import Post from "./Post";
-import Paginator from "../../header/components/Paginator";
-import Header from "../../header/components/Header";
-import Spinner from "../../spinner/Spinner";
-import { BREAKPOINTS } from "../../../constants";
+import Paginator from "../pagination/Paginator";
+import Header from "../header/Header";
+import Spinner from "../spinner/Spinner";
+import { BREAKPOINTS } from "../../constants";
 import NewPostForm from "./NewPostForm";
-import api from "../../../api/queries";
-import mutations from "../../../api/mutations";
+import api from "../../api/queries";
+import mutations from "../../api/mutations";
 
 const Wrapper = styled.div`
   min-height: 100vh;

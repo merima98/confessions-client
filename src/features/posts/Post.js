@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import styled from "styled-components";
 
 import { ThumbsDown, ThumbsUp } from "react-feather";
-import { BREAKPOINTS } from "../../../constants";
+import { BREAKPOINTS } from "../../constants";
 
 const StyledPost = styled.div`
   background-color: ${(props) => props.theme.colors.background};

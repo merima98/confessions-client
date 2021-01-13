@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
-import Posts from "./features/posts/components/Posts";
-import Bookmarks from "./features/posts/components/Bookmarks";
+import Posts from "./features/posts/Posts";
+import Bookmarks from "./features/bookmarks/Bookmarks";
 import { darkTheme, lightTheme } from "./themes/themes";
 import GlobalStyle from "./globalStyles";
 

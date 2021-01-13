@@ -13,8 +13,8 @@ import {
   Menu,
 } from "react-feather";
 
-import { BREAKPOINTS } from "../../../constants";
-import { useDarkMode } from "../../../state";
+import { BREAKPOINTS } from "../../constants";
+import { useDarkMode } from "../../state";
 
 const StyledHeader = styled.header`
   position: fixed;
