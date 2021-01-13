@@ -52,7 +52,7 @@ function NewPostForm(props) {
 
   async function onSubmit(values) {
     const newPost = await props.mutations.create(values);
-    props.setPosts([...props.posts, newPost.data]);
+    props.setPosts([newPost.data, ...props.posts]);
     formik.resetForm();
   }
 
