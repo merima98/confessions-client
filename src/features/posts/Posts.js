@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Post from "./Post";
 import Paginator from "../pagination/Paginator";
@@ -83,6 +84,7 @@ function Posts() {
   const [currentPage, setCurrentPage] = React.useState(0);
   const [totalPage, setTotalPage] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
+  const { t } = useTranslation();
 
   const pages = totalPage;
 
@@ -199,10 +201,10 @@ function Posts() {
                   />
                   <Buttons>
                     <Approve onClick={() => handleApprove(post._id)}>
-                      Approve
+                      {t("Approve")}
                     </Approve>{" "}
                     <Condemn onClick={() => handleCondemn(post._id)}>
-                      Condemn
+                      {t("Condemn")}
                     </Condemn>
                   </Buttons>
                 </PostsDiv>

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDarkMode } from "../../state";
+import { useTranslation } from "react-i18next";
 
 const Wrapper = styled.div`
   padding: 1rem 0.5rem;
@@ -42,6 +43,8 @@ const validationSchema = Yup.object().shape({
 
 function NewPostForm(props) {
   const isDarkMode = useDarkMode((state) => state.isDarkMode);
+  const { t } = useTranslation();
+
   const formik = useFormik({
     initialValues: {
       body: "",
@@ -65,7 +68,7 @@ function NewPostForm(props) {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.body}
-          placeholder="What is on your mind?"
+          placeholder={`${t("What is on your mind?")}`}
         />
         {isDarkMode ? (
           <SubmitButton
@@ -93,7 +96,7 @@ function NewPostForm(props) {
               color: !(formik.isValid && formik.dirty) ? "#C0C4C8" : null,
             }}
           >
-            Post
+            {t("Post")}
           </SubmitButton>
         )}
       </form>

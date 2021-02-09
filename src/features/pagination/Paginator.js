@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 import { BREAKPOINTS } from "../../constants";
 
@@ -32,15 +33,18 @@ const PaginatorControl = styled.button`
 `;
 
 function Paginator(props) {
+  const { t } = useTranslation();
   const { currentPage, lastPage, onPrevious, onNext } = props;
   return (
     <div className="paginator">
       <PaginatorControls>
         {currentPage > 0 && (
-          <PaginatorControl onClick={onPrevious}>Previous</PaginatorControl>
+          <PaginatorControl onClick={onPrevious}>
+            {t("Previous")}
+          </PaginatorControl>
         )}
         {currentPage < lastPage && (
-          <PaginatorControl onClick={onNext}>Next</PaginatorControl>
+          <PaginatorControl onClick={onNext}>{t("Next")}</PaginatorControl>
         )}
       </PaginatorControls>
     </div>

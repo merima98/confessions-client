@@ -42,5 +42,14 @@ const HEADER_NAVIGATION = [
     icon: "5",
   },
 ];
-
-export { BREAKPOINTS, HEADER_NAVIGATION };
+const LANGUAGES = [
+  {
+    label: "English (US)",
+    value: "en-US",
+  },
+  {
+    label: "Bosanski",
+    value: "ba",
+  },
+];
+export { BREAKPOINTS, HEADER_NAVIGATION, LANGUAGES };

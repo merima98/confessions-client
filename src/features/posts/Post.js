@@ -1,6 +1,7 @@
 import React from "react";
 import { format } from "date-fns";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 import { ThumbsDown, ThumbsUp } from "react-feather";
 import { BREAKPOINTS } from "../../constants";
@@ -44,8 +45,9 @@ const Like = styled.span`
 
 function Post(props) {
   const { body, date, totalDownvotes, totalUpvotes } = props;
+  const { t } = useTranslation();
 
-  let time = `${format(Date.parse(date), "dd.MM.yyyy")}. at ${format(
+  let time = `${format(Date.parse(date), "dd.MM.yyyy")}. ${t("at")} ${format(
     Date.parse(date),
     "kk:mm"
   )}`;
@@ -77,7 +79,7 @@ function Post(props) {
           Number(format(Date.parse(date), "mm")) <
         1
       ) {
-        time = `Just now`;
+        time = `${t("Just now")}`;
       } else {
         time = `${
           Number(format(Date.now(), "mm")) -
@@ -89,9 +91,7 @@ function Post(props) {
   return (
     <StyledPost>
       <Time>{time}</Time>
-
       <Body>{body}</Body>
-
       <Likes>
         <Like>
           <ThumbsUp style={{ width: "15px", height: "15px" }} /> {totalUpvotes}

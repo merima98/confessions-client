@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Home, ArrowUp, ArrowDown, Filter, RefreshCcw } from "react-feather";
 
 import { BREAKPOINTS, HEADER_NAVIGATION } from "../../constants";
-
-import { Home, ArrowUp, ArrowDown, Filter, RefreshCcw } from "react-feather";
+import LanguageForm from "../languageForm/LanguageForm";
 
 const Container = styled.div`
   padding: 4rem 1rem;
@@ -30,7 +31,16 @@ const Nav = styled.nav`
   flex-direction: column;
 `;
 
+const FormWrapper = styled.div`
+  margin-bottom: 2rem;
+  @media (min-width: ${BREAKPOINTS.SMALL_DEVICES}) {
+    width: 50%;
+  }
+`;
+
 function Bookmarks() {
+  const { t } = useTranslation();
+
   return (
     <Container>
       <Nav>
@@ -53,11 +63,14 @@ function Bookmarks() {
                 {item.icon === "5" ? (
                   <Filter style={{ marginRight: "1rem" }} />
                 ) : null}
-                {item.label}
+                {t(item.label)}
               </StyledNavLink>
             )
         )}
       </Nav>
+      <FormWrapper>
+        <LanguageForm />
+      </FormWrapper>
     </Container>
   );
 }
