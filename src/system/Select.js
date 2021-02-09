@@ -32,7 +32,7 @@ function Select(props) {
       borderRadius: "4px",
       ...getColors(),
       "&:hover": {
-        ...getColors(),
+        backgroundColor: isDarkMode ? "#4d4d4d" : "#f0f2f5",
       },
     }),
     singleValue: () => ({
@@ -52,11 +52,6 @@ function Select(props) {
         backgroundColor: isDarkMode ? "#4d4d4d" : "#f0f2f5",
       },
     }),
-    placeholder: () => {
-      return {
-        ...getFont(),
-      };
-    },
   };
 
   function DropdownIndicator(props) {
